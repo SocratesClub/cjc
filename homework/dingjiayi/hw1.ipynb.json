@@ -1,0 +1,1262 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "dingjiayi 15210130053"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "import random,datetime\n",
+    "import numpy as np\n",
+    "import pylab as plt\n",
+    "import statsmodels.api as sm\n",
+    "from scipy.stats import norm\n",
+    "from scipy.stats.stats import pearsonr"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'3'"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#str,int,float\n",
+    "str(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "5"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "int('5')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "7.1"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "float('7.1')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<function dir>"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dir"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['upper', 'zfill']"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dir(str)[-2:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x='Hey man'\n",
+    "dir(x)[-6:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<function lower>"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x.lower"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'hey man'"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x.lower()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'HEY MAN'"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x.upper()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "' hey man'"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x=' hey man '\n",
+    "x.rstrip()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'hey man'"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x.strip()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "list"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x=[1,3,5,8]\n",
+    "type(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'a': 1, 'c': 3, 'b': 2} (1, 3, 5, 6, 7, 7, 9) [4, 9, 0] {'a': 1, 'c': 3, 'b': 2} [4, 9, 0]\n"
+     ]
+    }
+   ],
+   "source": [
+    "l=[6,5,9]\n",
+    "t=(1,3,5,6,7,7,9)\n",
+    "s=([4,9,0])\n",
+    "d={'a':1,'b':2,'c':3}\n",
+    "a=np.array(d)\n",
+    "print a,t,s,d,s"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['i', 'love', 'u', 'too']"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "l=['i','love','u']\n",
+    "l.append('too')\n",
+    "l"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['lisi', 'zhangsan', 'wangkai']"
+      ]
+     },
+     "execution_count": 31,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "d={'zhangsan':100,'lisi':99,'wangkai':160}\n",
+    "d.keys()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[99, 100, 160]"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "d.values()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "99"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "d={'zhangsan':100,'lisi':99,'wangkai':160}\n",
+    "d['lisi']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[('lisi', 99), ('zhangsan', 100), ('wangkai', 160)]"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "d={'zhangsan':100,'lisi':99,'wangkai':160}\n",
+    "d.items()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "def dplus(x,y):\n",
+    "    return x/y+1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[3, 2, 1, 1]"
+      ]
+     },
+     "execution_count": 72,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "a=[dplus(2,i) for i in range(1,5)]\n",
+    "a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "range(19)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[5, 6, 7, 8, 9]"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "range(5,10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "5 15 0\n",
+      "6 18 1\n",
+      "7 21 2\n",
+      "8 24 3\n",
+      "9 27 4\n"
+     ]
+    }
+   ],
+   "source": [
+    "for i in range(5,10):\n",
+    "    print i,i*3,i%5"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "4\n",
+      "9\n",
+      "16\n",
+      "25\n",
+      "36\n",
+      "49\n",
+      "64\n",
+      "81\n",
+      "100\n",
+      "121\n",
+      "144\n",
+      "169\n",
+      "196\n",
+      "225\n",
+      "256\n",
+      "289\n",
+      "324\n",
+      "361\n",
+      "400\n",
+      "441\n"
+     ]
+    }
+   ],
+   "source": [
+    "for i in range(2,22):\n",
+    "    print i**2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1, 1, 1, 1, 1, 2, 2, 2, 2]"
+      ]
+     },
+     "execution_count": 76,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "a=[dplus(x,6) for x in range(1,10)]\n",
+    "a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 82,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[5, 3]"
+      ]
+     },
+     "execution_count": 82,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "map(dplus,[4,2],[1,1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "x等于5\n"
+     ]
+    }
+   ],
+   "source": [
+    "x=5\n",
+    "if x>5:\n",
+    "    print r'x大于5'\n",
+    "elif x<5:\n",
+    "    print r'x小于5'\n",
+    "else:\n",
+    "    print r'x等于5'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 98,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "8\n"
+     ]
+    }
+   ],
+   "source": [
+    "x=5\n",
+    "while x<8:\n",
+    "    x=x+1\n",
+    "print x\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 114,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "12\n",
+      "16\n"
+     ]
+    }
+   ],
+   "source": [
+    "x=6\n",
+    "while x<17:\n",
+    "    if x==10:\n",
+    "        break\n",
+    "    if x%2==0:\n",
+    "        print x*2\n",
+    "    x=x+1\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 118,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "integer division or modulo by zero\n",
+      "9\n",
+      "2\n",
+      "2\n"
+     ]
+    }
+   ],
+   "source": [
+    "for y in [0,1,5,8]:\n",
+    "    try:\n",
+    "        print dplus(8,y)\n",
+    "    except Exception ,e:\n",
+    "        print e\n",
+    "        pass"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 125,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[[5, 10, 25],\n",
+       " [6, 12, 36],\n",
+       " [7, 14, 49],\n",
+       " [8, 16, 64],\n",
+       " [9, 18, 81],\n",
+       " [10, 20, 100],\n",
+       " [11, 22, 121],\n",
+       " [12, 24, 144],\n",
+       " [13, 26, 169],\n",
+       " [14, 28, 196]]"
+      ]
+     },
+     "execution_count": 125,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data=[[i,i*2,i**2] for i in range(5,15)]\n",
+    "data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 126,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "5\t10\t25\n",
+      "6\t12\t36\n",
+      "7\t14\t49\n",
+      "8\t16\t64\n",
+      "9\t18\t81\n",
+      "10\t20\t100\n",
+      "11\t22\t121\n",
+      "12\t24\t144\n",
+      "13\t26\t169\n",
+      "14\t28\t196\n"
+     ]
+    }
+   ],
+   "source": [
+    "for i in data:\n",
+    "    print'\\t'.join(map(str,i))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 127,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "list"
+      ]
+     },
+     "execution_count": 127,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 128,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "10"
+      ]
+     },
+     "execution_count": 128,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "len(data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 129,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[5, 10, 25]"
+      ]
+     },
+     "execution_count": 129,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 130,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[10, 20, 100]"
+      ]
+     },
+     "execution_count": 130,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data[5]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 135,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "data=[[i,i*2,i**2] for i in range(100)]\n",
+    "f=open(\"/Users/dingjiayi/data.txt\",\"wb\")\n",
+    "for i in data:\n",
+    "    f.write('\\t'.join(map(str,i))+'\\n')\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 136,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['0\\t0\\t0\\n', '1\\t2\\t1\\n', '2\\t4\\t4\\n', '3\\t6\\t9\\n', '4\\t8\\t16\\n']"
+      ]
+     },
+     "execution_count": 136,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    data=f.readlines()\n",
+    "data[:5]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 138,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "100"
+      ]
+     },
+     "execution_count": 138,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    data=f.readlines(10)\n",
+    "len(data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 140,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0\t0\t0\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    print f.readline()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 141,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0\t0\t0\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    for k,i in enumerate(f):#数出位置\n",
+    "        if k%100==0:\n",
+    "            print i"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 160,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['0\\t0\\t0\\n',\n",
+       " '1\\t2\\t1\\n',\n",
+       " '2\\t4\\t4\\n',\n",
+       " '3\\t6\\t9\\n',\n",
+       " '4\\t8\\t16\\n',\n",
+       " '5\\t10\\t25\\n',\n",
+       " '6\\t12\\t36\\n',\n",
+       " '7\\t14\\t49\\n',\n",
+       " '8\\t16\\t64\\n',\n",
+       " '9\\t18\\t81\\n',\n",
+       " '10\\t20\\t100\\n',\n",
+       " '11\\t22\\t121\\n',\n",
+       " '12\\t24\\t144\\n',\n",
+       " '13\\t26\\t169\\n',\n",
+       " '14\\t28\\t196\\n',\n",
+       " '15\\t30\\t225\\n',\n",
+       " '16\\t32\\t256\\n',\n",
+       " '17\\t34\\t289\\n',\n",
+       " '18\\t36\\t324\\n',\n",
+       " '19\\t38\\t361\\n',\n",
+       " '20\\t40\\t400\\n',\n",
+       " '21\\t42\\t441\\n',\n",
+       " '22\\t44\\t484\\n',\n",
+       " '23\\t46\\t529\\n',\n",
+       " '24\\t48\\t576\\n',\n",
+       " '25\\t50\\t625\\n',\n",
+       " '26\\t52\\t676\\n',\n",
+       " '27\\t54\\t729\\n',\n",
+       " '28\\t56\\t784\\n',\n",
+       " '29\\t58\\t841\\n',\n",
+       " '30\\t60\\t900\\n',\n",
+       " '31\\t62\\t961\\n',\n",
+       " '32\\t64\\t1024\\n',\n",
+       " '33\\t66\\t1089\\n',\n",
+       " '34\\t68\\t1156\\n',\n",
+       " '35\\t70\\t1225\\n',\n",
+       " '36\\t72\\t1296\\n',\n",
+       " '37\\t74\\t1369\\n',\n",
+       " '38\\t76\\t1444\\n',\n",
+       " '39\\t78\\t1521\\n',\n",
+       " '40\\t80\\t1600\\n',\n",
+       " '41\\t82\\t1681\\n',\n",
+       " '42\\t84\\t1764\\n',\n",
+       " '43\\t86\\t1849\\n',\n",
+       " '44\\t88\\t1936\\n',\n",
+       " '45\\t90\\t2025\\n',\n",
+       " '46\\t92\\t2116\\n',\n",
+       " '47\\t94\\t2209\\n',\n",
+       " '48\\t96\\t2304\\n',\n",
+       " '49\\t98\\t2401\\n',\n",
+       " '50\\t100\\t2500\\n',\n",
+       " '51\\t102\\t2601\\n',\n",
+       " '52\\t104\\t2704\\n',\n",
+       " '53\\t106\\t2809\\n',\n",
+       " '54\\t108\\t2916\\n',\n",
+       " '55\\t110\\t3025\\n',\n",
+       " '56\\t112\\t3136\\n',\n",
+       " '57\\t114\\t3249\\n',\n",
+       " '58\\t116\\t3364\\n',\n",
+       " '59\\t118\\t3481\\n',\n",
+       " '60\\t120\\t3600\\n',\n",
+       " '61\\t122\\t3721\\n',\n",
+       " '62\\t124\\t3844\\n',\n",
+       " '63\\t126\\t3969\\n',\n",
+       " '64\\t128\\t4096\\n',\n",
+       " '65\\t130\\t4225\\n',\n",
+       " '66\\t132\\t4356\\n',\n",
+       " '67\\t134\\t4489\\n',\n",
+       " '68\\t136\\t4624\\n',\n",
+       " '69\\t138\\t4761\\n',\n",
+       " '70\\t140\\t4900\\n',\n",
+       " '71\\t142\\t5041\\n',\n",
+       " '72\\t144\\t5184\\n',\n",
+       " '73\\t146\\t5329\\n',\n",
+       " '74\\t148\\t5476\\n',\n",
+       " '75\\t150\\t5625\\n',\n",
+       " '76\\t152\\t5776\\n',\n",
+       " '77\\t154\\t5929\\n',\n",
+       " '78\\t156\\t6084\\n',\n",
+       " '79\\t158\\t6241\\n',\n",
+       " '80\\t160\\t6400\\n',\n",
+       " '81\\t162\\t6561\\n',\n",
+       " '82\\t164\\t6724\\n',\n",
+       " '83\\t166\\t6889\\n',\n",
+       " '84\\t168\\t7056\\n',\n",
+       " '85\\t170\\t7225\\n',\n",
+       " '86\\t172\\t7396\\n',\n",
+       " '87\\t174\\t7569\\n',\n",
+       " '88\\t176\\t7744\\n',\n",
+       " '89\\t178\\t7921\\n',\n",
+       " '90\\t180\\t8100\\n',\n",
+       " '91\\t182\\t8281\\n',\n",
+       " '92\\t184\\t8464\\n',\n",
+       " '93\\t186\\t8649\\n',\n",
+       " '94\\t188\\t8836\\n',\n",
+       " '95\\t190\\t9025\\n',\n",
+       " '96\\t192\\t9216\\n',\n",
+       " '97\\t194\\t9409\\n',\n",
+       " '98\\t196\\t9604\\n',\n",
+       " '99\\t198\\t9801\\n']"
+      ]
+     },
+     "execution_count": 160,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data=[]\n",
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    for line in f:\n",
+    "        line = line.replace(\" \",\"\")\n",
+    "        data.append(line)\n",
+    "data\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 163,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[[0, 0, 0],\n",
+       " [1, 2, 1],\n",
+       " [2, 4, 4],\n",
+       " [3, 6, 9],\n",
+       " [4, 8, 16],\n",
+       " [5, 10, 25],\n",
+       " [6, 12, 36],\n",
+       " [7, 14, 49],\n",
+       " [8, 16, 64],\n",
+       " [9, 18, 81],\n",
+       " [10, 20, 100],\n",
+       " [11, 22, 121],\n",
+       " [12, 24, 144],\n",
+       " [13, 26, 169],\n",
+       " [14, 28, 196],\n",
+       " [15, 30, 225],\n",
+       " [16, 32, 256],\n",
+       " [17, 34, 289],\n",
+       " [18, 36, 324],\n",
+       " [19, 38, 361],\n",
+       " [20, 40, 400],\n",
+       " [21, 42, 441],\n",
+       " [22, 44, 484],\n",
+       " [23, 46, 529],\n",
+       " [24, 48, 576],\n",
+       " [25, 50, 625],\n",
+       " [26, 52, 676],\n",
+       " [27, 54, 729],\n",
+       " [28, 56, 784],\n",
+       " [29, 58, 841],\n",
+       " [30, 60, 900],\n",
+       " [31, 62, 961],\n",
+       " [32, 64, 1024],\n",
+       " [33, 66, 1089],\n",
+       " [34, 68, 1156],\n",
+       " [35, 70, 1225],\n",
+       " [36, 72, 1296],\n",
+       " [37, 74, 1369],\n",
+       " [38, 76, 1444],\n",
+       " [39, 78, 1521],\n",
+       " [40, 80, 1600],\n",
+       " [41, 82, 1681],\n",
+       " [42, 84, 1764],\n",
+       " [43, 86, 1849],\n",
+       " [44, 88, 1936],\n",
+       " [45, 90, 2025],\n",
+       " [46, 92, 2116],\n",
+       " [47, 94, 2209],\n",
+       " [48, 96, 2304],\n",
+       " [49, 98, 2401],\n",
+       " [50, 100, 2500],\n",
+       " [51, 102, 2601],\n",
+       " [52, 104, 2704],\n",
+       " [53, 106, 2809],\n",
+       " [54, 108, 2916],\n",
+       " [55, 110, 3025],\n",
+       " [56, 112, 3136],\n",
+       " [57, 114, 3249],\n",
+       " [58, 116, 3364],\n",
+       " [59, 118, 3481],\n",
+       " [60, 120, 3600],\n",
+       " [61, 122, 3721],\n",
+       " [62, 124, 3844],\n",
+       " [63, 126, 3969],\n",
+       " [64, 128, 4096],\n",
+       " [65, 130, 4225],\n",
+       " [66, 132, 4356],\n",
+       " [67, 134, 4489],\n",
+       " [68, 136, 4624],\n",
+       " [69, 138, 4761],\n",
+       " [70, 140, 4900],\n",
+       " [71, 142, 5041],\n",
+       " [72, 144, 5184],\n",
+       " [73, 146, 5329],\n",
+       " [74, 148, 5476],\n",
+       " [75, 150, 5625],\n",
+       " [76, 152, 5776],\n",
+       " [77, 154, 5929],\n",
+       " [78, 156, 6084],\n",
+       " [79, 158, 6241],\n",
+       " [80, 160, 6400],\n",
+       " [81, 162, 6561],\n",
+       " [82, 164, 6724],\n",
+       " [83, 166, 6889],\n",
+       " [84, 168, 7056],\n",
+       " [85, 170, 7225],\n",
+       " [86, 172, 7396],\n",
+       " [87, 174, 7569],\n",
+       " [88, 176, 7744],\n",
+       " [89, 178, 7921],\n",
+       " [90, 180, 8100],\n",
+       " [91, 182, 8281],\n",
+       " [92, 184, 8464],\n",
+       " [93, 186, 8649],\n",
+       " [94, 188, 8836],\n",
+       " [95, 190, 9025],\n",
+       " [96, 192, 9216],\n",
+       " [97, 194, 9409],\n",
+       " [98, 196, 9604],\n",
+       " [99, 198, 9801]]"
+      ]
+     },
+     "execution_count": 163,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data=[]\n",
+    "with open(\"/Users/dingjiayi/data.txt\",\"r\") as f:\n",
+    "    for line in f:\n",
+    "         line = line.replace('\\n', '').split('\\t')\n",
+    "         line = [int(i) for i in line]\n",
+    "         data.append(line)\n",
+    "data\n",
+    "        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.11"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}
