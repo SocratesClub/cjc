@@ -6,7 +6,7 @@
 ***
 ***
 
-- 授课人：王成军
+- 授课人：[王成军](http://chengjun.github.io)
 - 联系方式：wangchengjun@nju.edu.cn
 - 计算传播网：http://computational-communication.com
 
