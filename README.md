@@ -50,7 +50,7 @@
 
 # 作业信息
 
-https://github.com/computational-class/cjc/wiki/%E4%BD%9C%E4%B8%9A
+https://github.com/computational-class/cjc/wiki/
 
 # Tutorials
 http://github.com/computational-class/cjc/tree/gh-pages/code/
