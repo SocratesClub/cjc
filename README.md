@@ -60,7 +60,7 @@ http://github.com/computational-class/cjc/tree/gh-pages/code/ 或者 http://nbvi
 例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
 
 # PPT
-http://github.com/computational-class/cjc/tree/gh-pages/slides/ 或者 http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/
+http://github.com/computational-class/cjc/tree/gh-pages/slides/ 
 
 推荐：复制slides文件夹中的ipynb文件网络地址，粘贴到http://nbviewer.jupyter.org/ 更流畅浏览
 
