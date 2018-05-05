@@ -1,0 +1,17 @@
+[sframe]
+version=0
+num_segments=0
+num_columns=5
+nrows=6040
+[column_names]
+0000=user_id
+0001=gender
+0002=age
+0003=occupation
+0004=zip-code
+[column_files]
+0000=m_d67bf929486371db.sidx:0
+0001=m_d67bf929486371db.sidx:1
+0002=m_d67bf929486371db.sidx:2
+0003=m_d67bf929486371db.sidx:3
+0004=m_d67bf929486371db.sidx:4
