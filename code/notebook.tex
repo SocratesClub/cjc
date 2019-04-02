@@ -141,7 +141,7 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{0.about2cjc}
+    \title{04.PythonCrawler\_netease\_music}
     
     
     
@@ -280,195 +280,956 @@
     
 
     
-    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+    https://github.com/RitterHou/music-163
 
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+爬取网易云音乐的所有的歌曲的评论数。以下为主要思路：
 
-\hypertarget{ux8ba1ux7b97ux65b0ux95fbux4f20ux64adux5b66}{%
-\section{计算新闻传播学}\label{ux8ba1ux7b97ux65b0ux95fbux4f20ux64adux5b66}}
+爬取所有的歌手信息（artists.py）；
+根据上一步爬取到的歌手信息去爬取所有的专辑信息（album\_by
+\_artist.py）； 根据专辑信息爬取所有的歌曲信息（music\_by \_album.py）；
+根据歌曲信息爬取其评论条数（comments\_by \_music.py）
+数据库相关的语句都存放于（sql.py）中。
 
-\hypertarget{ux8bfeux7a0bux7b80ux4ecb}{%
-\subsection{课程简介}\label{ux8bfeux7a0bux7b80ux4ecb}}
+    观察网易云音乐官网页面HTML结构 - 首页（ http://music.163.com/） -
+歌单分类页（ http://music.163.com/discover/playlist）。 - 歌单页（
+http://music.163.com/playlist?id=499518394） - 歌曲详情页（
+http://music.163.com/song?id=109998）
 
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+\end{Verbatim}
 
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
-王成军
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{headers} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Encoding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip, deflate, sdch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zh\PYZhy{}CN,zh;q=0.8,en;q=0.6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cache\PYZhy{}Control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Connection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep\PYZhy{}alive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cookie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}ntes\PYZus{}nnid=7eced19b27ffae35dad3f8f2bf5885cd,1476521011210; \PYZus{}ntes\PYZus{}nuid=7eced19b27ffae35dad3f8f2bf5885cd; usertrack=c+5+hlgB7TgnsAmACnXtAg==; Province=025; City=025; NTES\PYZus{}PASSPORT=6n9ihXhbWKPi8yAqG.i2kETSCRa.ug06Txh8EMrrRsliVQXFV\PYZus{}orx5HffqhQjuGHkNQrLOIRLLotGohL9s10wcYSPiQfI2wiPacKlJ3nYAXgM; P\PYZus{}INFO=hourui93@163.com|1476523293|1|study|11\PYZam{}12|jis\PYZam{}1476511733\PYZam{}mail163\PYZsh{}jis\PYZam{}320100\PYZsh{}10\PYZsh{}0\PYZsh{}0|151889\PYZam{}0|g37\PYZus{}client\PYZus{}check\PYZam{}mailsettings\PYZam{}mail163\PYZam{}study\PYZam{}blog|hourui93@163.com; NTES\PYZus{}SESS=Fa2uk.YZsGoj59AgD6tRjTXGaJ8\PYZus{}1\PYZus{}4YvGfXUkS7C1NwtMe.tG1Vzr255TXM6yj2mKqTZzqFtoEKQrgewi9ZK60ylIqq5puaG6QIaNQ7EK5MTcRgHLOhqttDHfaI\PYZus{}vsBzB4bibfamzx1.fhlpqZh\PYZus{}FcnXUYQFw5F5KIBUmGJg7xdasvGf\PYZus{}EgfICWV; S\PYZus{}INFO=1476597594|1|0\PYZam{}80\PYZsh{}\PYZsh{}|hourui93; NETEASE\PYZus{}AUTH\PYZus{}SOURCE=space; NETEASE\PYZus{}AUTH\PYZus{}USERNAME=hourui93; \PYZus{}ga=GA1.2.1405085820.1476521280; JSESSIONID\PYZhy{}WYYY=cbd082d2ce2cffbcd5c085d8bf565a95aee3173ddbbb00bfa270950f93f1d8bb4cb55a56a4049fa8c828373f630c78f4a43d6c3d252c4c44f44b098a9434a7d8fc110670a6e1e9af992c78092936b1e19351435ecff76a181993780035547fa5241a5afb96e8c665182d0d5b911663281967d675ff2658015887a94b3ee1575fa1956a5a}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{3A1476607977016; \PYZus{}iuqxldmzr\PYZus{}=25; \PYZus{}\PYZus{}utma=94650624.1038096298.1476521011.1476595468.1476606177.8; \PYZus{}\PYZus{}utmb=94650624.20.10.1476606177; \PYZus{}\PYZus{}utmc=94650624; \PYZus{}\PYZus{}utmz=94650624.1476521011.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Host}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pragma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Upgrade\PYZhy{}Insecure\PYZhy{}Requests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{User\PYZhy{}Agent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
 
-wangchengjun@nju.edu.cn
 
-计算传播网 http://computational-communication.com
+    \hypertarget{ux722cux53d6ux6240ux6709ux7684ux6b4cux624bux4fe1ux606fartists.py}{%
+\section{爬取所有的歌手信息（artists.py）}\label{ux722cux53d6ux6240ux6709ux7684ux6b4cux624bux4fe1ux606fartists.py}}
 
-    http://computational-communication.com
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{c+c1}{\PYZsh{} \PYZsh{} 爬虫基本原理}
+          \PY{c+c1}{\PYZsh{} from IPython.display import display\PYZus{}html, HTML}
+          
+          \PY{c+c1}{\PYZsh{} HTML(\PYZsq{}\PYZlt{}iframe src=http://music.163.com/\PYZsh{}/discover/artist/cat width=1000 height=500\PYZgt{}\PYZlt{}/iframe\PYZgt{}\PYZsq{})}
+\end{Verbatim}
 
-    \hypertarget{ux5185ux5bb9}{%
-\section{内容}\label{ux5185ux5bb9}}
 
-\begin{itemize}
-\tightlist
-\item
-  时间安排
-\item
-  课程资料
-\item
-  授课计划
-\item
-  课前准备
-\end{itemize}
+    http://music.163.com/\#/discover/artist/cat?id=4003\&initial=0
 
-    \hypertarget{ux65f6ux95f4ux5b89ux6392}{%
-\section{时间安排}\label{ux65f6ux95f4ux5b89ux6392}}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{group\PYZus{}id} \PY{o}{=} \PY{l+m+mi}{4003}
+        \PY{n}{initial} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{group\PYZus{}id}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{initial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{initial}\PY{p}{\PYZcb{}}
+        \PY{n}{r} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/discover/artist/cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{n}{params}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 网页解析}
+        \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{content}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html.parser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{body} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{body}
+\end{Verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  36学时，两学分
-\end{itemize}
 
-\begin{longtable}[]{@{}lcccr@{}}
-\toprule
-时间 & 上午 & 下午 & 晚上 & 课时数量\tabularnewline
-\midrule
-\endhead
-2018-04-27 周五 & 9:00-12:00 & 13:30-17:30 & 晚上有课，下午延长半个小时
-& 6学时\tabularnewline
-2018-04-28 周六 & 9:00-12:00 & 15:30-17:30 & 18:30-19:30 授课
-19:30-20:30 作业\&答疑 & 6学时\tabularnewline
-2018-04-29 周天 & 9:00-12:00 & 14:00-17:00 & 作业\&答疑 &
-6学时\tabularnewline
-2018-05-04 周五 & 9:00-12:00 & 13:30-17:30 & -- & 6学时\tabularnewline
-2018-05-05 周六 & 9:00-12:00 & 14:00-17:00 & 作业\&答疑 &
-6学时\tabularnewline
-2018-05-06 周天 & 9:00-12:00 & 14:00-17:00 & 作业\&答疑 &
-6学时\tabularnewline
-\bottomrule
-\end{longtable}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{hotartist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{n}{hot\PYZus{}artists} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{artist} \PY{o+ow}{in} \PY{n}{hot\PYZus{}artists}\PY{p}{:}
+            \PY{n}{artist\PYZus{}id} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/artist?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+            \PY{n}{artist\PYZus{}name} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{的音乐}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{hotartist\PYZus{}dic}\PY{p}{[}\PY{n}{artist\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{artist\PYZus{}name}
+            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} 打印错误日志}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
 
-    \hypertarget{ux8bfeux7a0bux8d44ux6599}{%
-\section{课程资料}\label{ux8bfeux7a0bux8d44ux6599}}
 
-\begin{itemize}
-\tightlist
-\item
-  (包括数据、PPT、可视化、图片、代码)
-  http://github.com/computational-class/cjc/
-\end{itemize}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{artist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{n}{artists} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nm nm\PYZhy{}icn f\PYZhy{}thide s\PYZhy{}fc0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{artist} \PY{o+ow}{in} \PY{n}{artists}\PY{p}{:}
+                \PY{n}{artist\PYZus{}id} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/artist?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+                \PY{n}{artist\PYZus{}name} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{的音乐}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{n}{artist\PYZus{}dic}\PY{p}{[}\PY{n}{artist\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{artist\PYZus{}name}
+                \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} 打印错误日志}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
 
-    \hypertarget{ux6388ux8bfeux8ba1ux5212}{%
-\section{授课计划}\label{ux6388ux8bfeux8ba1ux5212}}
 
-\begin{itemize}
-\item
-  一、\href{01.intro2cjc.ipynb}{计算新闻传播学简介}
-\item
-  二、\href{02.bigdata.ipynb}{数据科学的编程工具：大数据(1h)}
-\item ~
-  \hypertarget{ux4e09ux6570ux636eux79d1ux5b66ux7684ux7f16ux7a0bux5de5ux5177pythonux4f7fux7528ux7b80ux4ecb3h}{%
-  \subsection{\texorpdfstring{三、\href{03.python_intro.ipynb}{数据科学的编程工具：Python使用简介（3h）}}{三、数据科学的编程工具：Python使用简介（3h）}}\label{ux4e09ux6570ux636eux79d1ux5b66ux7684ux7f16ux7a0bux5de5ux5177pythonux4f7fux7528ux7b80ux4ecb3h}}
-\item
-  四、数据抓取：抓取两会报告、\href{04.PythonCrawler_beautifulsoup.ipynb}{Beautifulsoup}
-\item
-  五、数据抓取：抓取天涯论坛帖子
-\item
-  六、数据清洗：清洗推特数据
-\item ~
-  \hypertarget{ux4e03ux6570ux636eux6e05ux6d17ux6e05ux6d17ux5360ux4e2dux65b0ux95fbux6e05ux6d17ux5929ux6dafux8bbaux575bux5e16ux5b50}{%
-  \subsection{七、数据清洗：清洗占中新闻、清洗天涯论坛帖子}\label{ux4e03ux6570ux636eux6e05ux6d17ux6e05ux6d17ux5360ux4e2dux65b0ux95fbux6e05ux6d17ux5929ux6dafux8bbaux575bux5e16ux5b50}}
-\item
-  八、计算传播与统计初步: 分析天涯论坛的帖子
-\item
-  九、计算传播与机器学习: 分析天涯论坛的帖子
-\end{itemize}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{artist\PYZus{}dic}
+\end{Verbatim}
 
-    \hypertarget{ux6388ux8bfeux8ba1ux5212}{%
-\section{授课计划}\label{ux6388ux8bfeux8ba1ux5212}}
 
-\begin{itemize}
-\tightlist
-\item
-  十、文本挖掘简介
-\end{itemize}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} \{'1046093': 'Laxmikant-Pyarelal',
+         '1049361': 'ГРУППА ПИЦЦА',
+         '1050038': 'Фактор-2',
+         '106666': 'Дрыгва',
+         '106672': 'Камаедзiца',
+         '106719': 'คาราบาว',
+         '106733': 'ДДТ',
+         '106985': 'Харизма',
+         '106997': '17:28',
+         '106998': '25 hours',
+         '1078416': 'บีไฟว์',
+         '1083129': '2nd Room',
+         '1143051': 'SkyLights',
+         '1158110': 'ChinaDJRadio',
+         '1160013': '一个人的宇宙',
+         '12082153': 'Самое большое простое число ',
+         '12139012': 'Do\textbackslash{}xa0Shit',
+         '12191177': 'รวมศิลปิน Luster',
+         '12194976': 'BNC\$BrandNewCohort',
+         '12200872': 'SIH SHANDIIN HOOLAI',
+         '12204600': '9596乐队',
+         '12215016': 'Groovy LIVE SYSU',
+         '12424041': 'İmera',
+         '12509248': 'Rabbit工作室',
+         '12639444': 'NECROSADISTIC PUNISHMENT',
+         '12641336': '南之南',
+         '12699532': 'PDWN',
+         '12788512': '拾旬乐',
+         '12797604': '亥門',
+         '12814141': 'Unicorn\_official',
+         '12867140': 'Xiao·Xin',
+         '12897296': '444+222',
+         '12897309': '蓝色妮可',
+         '12924892': 'K-AN',
+         '12943092': '堆填区',
+         '12955345': 'HAKAN',
+         '12967340': 'The\textbackslash{}xa0Messy梅西合唱团',
+         '12974253': "นา'กา",
+         '12975240': 'ไมโคร',
+         '12977209': 'เจนนี่ VS คอรี่',
+         '13006273': '演绎',
+         '13011233': '5 สาวฝุ่นตลบ',
+         '13012236': 'อินคา',
+         '13022208': 'เบิร์ด \& เสก',
+         '13023092': 'บางแก้ว',
+         '13037921': 'MANGOMusic',
+         '13109480': 'Memetjan\_Alim',
+         '13110785': 'Jangaa组合',
+         '13151437': 'Karmashsa Ansambli',
+         '13222504': 'Линник',
+         '13222529': 'Улиткас',
+         '13226421': 'てん、',
+         '13226728': 'สักวา',
+         '13227224': "'לוקץ",
+         '13284125': 'The\textbackslash{}xa0Singers\textbackslash{}xa0of\textbackslash{}xa0Lights',
+         '13284192': 'Buzz Fridge',
+         '13285024': 'NamelessTag無名標籤',
+         '13429324': 'Олег Пунгин',
+         '13430117': 'Конец фильма',
+         '13430153': 'ГАЛЯЦЭНАГЕН',
+         '13462069': 'Христина Соловій',
+         '13464081': '\#Холостячки',
+         '13465021': 'שמעון ולוי',
+         '13465093': 'שלמה ארצי',
+         '13484124': 'จ่อย รวมมิตร',
+         '13484209': 'Вика Курзова',
+         '13484253': 'Фибры',
+         '13485181': 'Леонид Руденко',
+         '13485216': 'Шампанского Пожалуйста!',
+         '13485217': 'Саша Ветер',
+         '13485332': 'Сањар и Сам Я',
+         '13486037': '\textbackslash{}u200bPura Mashankura',
+         '13486232': 'מור ברנשטיין',
+         '13497013': '2 Of Us',
+         '13497129': 'Артём Угловский',
+         '13498112': 'เซ็กซ์ ตลาดแตก',
+         '13498157': 'עילי בוטנר',
+         '13500036': 'อ้อมใจ มหาหิงค์',
+         '13500833': 'האחיות כרקוקלי',
+         '13683852': 'ZebraZebra',
+         '13707392': 'מועדון הקצב של אביהו פנחסוב',
+         '13790097': 'Major\textbackslash{}xa0Fifth',
+         '13793613': 'NIIGELL\textbackslash{}xa0QGQII',
+         '13793901': '王雪山',
+         '13908376': 'Anuradha',
+         '13911469': 'Yellow Duck!',
+         '14100185': 'โอ๊ะโอ',
+         '14101200': 'สี่โพดำ',
+         '711224': " C'mon Lennon",
+         '713076': ' Dewa Budjana',
+         '753041': 'ידידיה וגבריאל בלחסן',
+         '763093': ' Пионерлагерь Пыльная Радуга',
+         '784048': 'Чайф',
+         '794269': 'ОбщежитиЕ ',
+         '818191': 'Мельница',
+         '823055': '3.2.1',
+         '827392': 'Джинсовые мальчики',
+         '908212': 'Психея ',
+         '942020': ' Johnyboy',
+         '957151': '██████'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{save\PYZus{}artist}\PY{p}{(}\PY{n}{group\PYZus{}id}\PY{p}{,} \PY{n}{initial}\PY{p}{,} \PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{p}{,} \PY{n}{artisti\PYZus{}dic}\PY{p}{)}\PY{p}{:}
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{group\PYZus{}id}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{initial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{initial}\PY{p}{\PYZcb{}}
+             \PY{n}{r} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/discover/artist/cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{n}{params}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 网页解析}
+             \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{content}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html.parser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{body} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{body}
+         
+             \PY{n}{hot\PYZus{}artists} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{artists} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nm nm\PYZhy{}icn f\PYZhy{}thide s\PYZhy{}fc0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{artist} \PY{o+ow}{in} \PY{n}{hot\PYZus{}artists}\PY{p}{:}
+                 \PY{n}{artist\PYZus{}id} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/artist?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{artist\PYZus{}name} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{的音乐}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{p}{[}\PY{n}{artist\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{artist\PYZus{}name}
+                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} 打印错误日志}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{artist} \PY{o+ow}{in} \PY{n}{artists}\PY{p}{:}
+                 \PY{n}{artist\PYZus{}id} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/artist?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{artist\PYZus{}name} \PY{o}{=} \PY{n}{artist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{的音乐}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{artist\PYZus{}dic}\PY{p}{[}\PY{n}{artist\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{artist\PYZus{}name}
+                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} 打印错误日志}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}return artist\PYZus{}dic, hot\PYZus{}artist\PYZus{}dic}
+\end{Verbatim}
 
-\begin{itemize}
-\item
-  十四、计算传播应用：推荐系统实践
-\item
-  十五、网络科学理论简介
-\item ~
-  \hypertarget{ux5341ux516dux7f51ux7edcux79d1ux5b66ux6a21ux578b}{%
-  \subsection{十六、网络科学模型}\label{ux5341ux516dux7f51ux7edcux79d1ux5b66ux6a21ux578b}}
-\item
-  十七、网络科学实践：使用networkx分析网络结构
-\item
-  十八、课程总结与学生研究项目展示
-\end{itemize}
 
-    \hypertarget{ux8bfeux524dux51c6ux5907}{%
-\section{课前准备}\label{ux8bfeux524dux51c6ux5907}}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{gg} \PY{o}{=} \PY{l+m+mi}{4003}
+         \PY{n}{initial} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{artist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{hot\PYZus{}artist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} 
+         \PY{n}{save\PYZus{}artist}\PY{p}{(}\PY{n}{gg}\PY{p}{,} \PY{n}{initial}\PY{p}{,} \PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{p}{,} \PY{n}{artist\PYZus{}dic}  \PY{p}{)}
+\end{Verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  下载\&安装anaconda python https://www.continuum.io/downloads
-\end{itemize}
 
-    \hypertarget{ux8bfeux524dux51c6ux5907}{%
-\section{课前准备}\label{ux8bfeux524dux51c6ux5907}}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{artist\PYZus{}dic}
+\end{Verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  申请graphlab的学术版本，获得序列号即可
 
-  \begin{itemize}
-  \item
-    https://dato.com/download/academic.html
-  \item
-    https://turi.com/download/academic.html
-  \end{itemize}
-\end{itemize}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} \{'1046093': 'Laxmikant-Pyarelal',
+          '1049361': 'ГРУППА ПИЦЦА',
+          '1050038': 'Фактор-2',
+          '106666': 'Дрыгва',
+          '106672': 'Камаедзiца',
+          '106719': 'คาราบาว',
+          '106733': 'ДДТ',
+          '106985': 'Харизма',
+          '106997': '17:28',
+          '106998': '25 hours',
+          '1078416': 'บีไฟว์',
+          '1083129': '2nd Room',
+          '1143051': 'SkyLights',
+          '1158110': 'ChinaDJRadio',
+          '1160013': '一个人的宇宙',
+          '12082153': 'Самое большое простое число ',
+          '12139012': 'Do\textbackslash{}xa0Shit',
+          '12191177': 'รวมศิลปิน Luster',
+          '12194976': 'BNC\$BrandNewCohort',
+          '12200872': 'SIH SHANDIIN HOOLAI',
+          '12204600': '9596乐队',
+          '12215016': 'Groovy LIVE SYSU',
+          '12424041': 'İmera',
+          '12509248': 'Rabbit工作室',
+          '12639444': 'NECROSADISTIC PUNISHMENT',
+          '12641336': '南之南',
+          '12699532': 'PDWN',
+          '12788512': '拾旬乐',
+          '12797604': '亥門',
+          '12814141': 'Unicorn\_official',
+          '12867140': 'Xiao·Xin',
+          '12897296': '444+222',
+          '12897309': '蓝色妮可',
+          '12924892': 'K-AN',
+          '12943092': '堆填区',
+          '12955345': 'HAKAN',
+          '12967340': 'The\textbackslash{}xa0Messy梅西合唱团',
+          '12974253': "นา'กา",
+          '12975240': 'ไมโคร',
+          '12977209': 'เจนนี่ VS คอรี่',
+          '13006273': '演绎',
+          '13011233': '5 สาวฝุ่นตลบ',
+          '13012236': 'อินคา',
+          '13022208': 'เบิร์ด \& เสก',
+          '13023092': 'บางแก้ว',
+          '13037921': 'MANGOMusic',
+          '13109480': 'Memetjan\_Alim',
+          '13110785': 'Jangaa组合',
+          '13151437': 'Karmashsa Ansambli',
+          '13222504': 'Линник',
+          '13222529': 'Улиткас',
+          '13226421': 'てん、',
+          '13226728': 'สักวา',
+          '13227224': "'לוקץ",
+          '13284125': 'The\textbackslash{}xa0Singers\textbackslash{}xa0of\textbackslash{}xa0Lights',
+          '13284192': 'Buzz Fridge',
+          '13285024': 'NamelessTag無名標籤',
+          '13429324': 'Олег Пунгин',
+          '13430117': 'Конец фильма',
+          '13430153': 'ГАЛЯЦЭНАГЕН',
+          '13462069': 'Христина Соловій',
+          '13464081': '\#Холостячки',
+          '13465021': 'שמעון ולוי',
+          '13465093': 'שלמה ארצי',
+          '13484124': 'จ่อย รวมมิตร',
+          '13484209': 'Вика Курзова',
+          '13484253': 'Фибры',
+          '13485181': 'Леонид Руденко',
+          '13485216': 'Шампанского Пожалуйста!',
+          '13485217': 'Саша Ветер',
+          '13485332': 'Сањар и Сам Я',
+          '13486037': '\textbackslash{}u200bPura Mashankura',
+          '13486232': 'מור ברנשטיין',
+          '13497013': '2 Of Us',
+          '13497129': 'Артём Угловский',
+          '13498112': 'เซ็กซ์ ตลาดแตก',
+          '13498157': 'עילי בוטנר',
+          '13500036': 'อ้อมใจ มหาหิงค์',
+          '13500833': 'האחיות כרקוקלי',
+          '13683852': 'ZebraZebra',
+          '13707392': 'מועדון הקצב של אביהו פנחסוב',
+          '13790097': 'Major\textbackslash{}xa0Fifth',
+          '13793613': 'NIIGELL\textbackslash{}xa0QGQII',
+          '13793901': '王雪山',
+          '13908376': 'Anuradha',
+          '13911469': 'Yellow Duck!',
+          '14100185': 'โอ๊ะโอ',
+          '14101200': 'สี่โพดำ',
+          '711224': " C'mon Lennon",
+          '713076': ' Dewa Budjana',
+          '753041': 'ידידיה וגבריאל בלחסן',
+          '763093': ' Пионерлагерь Пыльная Радуга',
+          '784048': 'Чайф',
+          '794269': 'ОбщежитиЕ ',
+          '818191': 'Мельница',
+          '823055': '3.2.1',
+          '827392': 'Джинсовые мальчики',
+          '908212': 'Психея ',
+          '942020': ' Johnyboy',
+          '957151': '██████'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{artist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{hot\PYZus{}artist\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{65}\PY{p}{,} \PY{l+m+mi}{91}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{save\PYZus{}artist}\PY{p}{(}\PY{n}{gg}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{p}{,} \PY{n}{artist\PYZus{}dic}  \PY{p}{)}
+\end{Verbatim}
 
-    \hypertarget{ux8bfeux524dux51c6ux5907}{%
-\section{课前准备}\label{ux8bfeux524dux51c6ux5907}}
 
-\begin{itemize}
-\tightlist
-\item
-  Python入门 http://www.imooc.com/view/177
-\item
-  \href{http://book.douban.com/subject/5948760/}{Beginning Python
-  《Python基础教程》}
-\item
-  用Python玩转数据
-  http://www.icourse163.org/course/nju-1001571005\#/info
-\end{itemize}
+    \begin{Verbatim}[commandchars=\\\{\}]
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
 
-    \hypertarget{ux8bfeux524dux51c6ux5907}{%
-\section{课前准备}\label{ux8bfeux524dux51c6ux5907}}
+    \end{Verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  注册github账户 http://github.com
-\item
-  watch本课程repo: https://github.com/computational-class/cjc/
-\item
-  下载并安装github desktop客户端 （建议：非必须内容）：
-  https://desktop.github.com/
-\end{itemize}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{p}{)}
+\end{Verbatim}
 
-    \hypertarget{pythons-role-in-big-data-analytics}{%
-\section{Python's Role in Big Data
-Analytics}\label{pythons-role-in-big-data-analytics}}
 
-    \hypertarget{this-is-the-end.}{%
-\section{This is the End.}\label{this-is-the-end.}}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 254
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{artist\PYZus{}dic}\PY{p}{)}
+\end{Verbatim}
 
-\begin{quote}
-Thank you for your attention!
-\end{quote}
 
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} 1608
+\end{Verbatim}
+            
+    \hypertarget{ux722cux53d6ux6240ux6709ux7684ux4e13ux8f91ux4fe1ux606falbum_by-_artist.py}{%
+\section{爬取所有的专辑信息（album\_by
+\_artist.py）}\label{ux722cux53d6ux6240ux6709ux7684ux4e13ux8f91ux4fe1ux606falbum_by-_artist.py}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{hot\PYZus{}artist\PYZus{}dic}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} '89659'
+\end{Verbatim}
+            
+    http://music.163.com/\#/artist/album?id=89659\&limit=400
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{headers} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Encoding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip, deflate, sdch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zh\PYZhy{}CN,zh;q=0.8,en;q=0.6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cache\PYZhy{}Control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Connection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep\PYZhy{}alive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cookie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}ntes\PYZus{}nnid=7eced19b27ffae35dad3f8f2bf5885cd,1476521011210; \PYZus{}ntes\PYZus{}nuid=7eced19b27ffae35dad3f8f2bf5885cd; usertrack=c+5+hlgB7TgnsAmACnXtAg==; Province=025; City=025; \PYZus{}ga=GA1.2.1405085820.1476521280; NTES\PYZus{}PASSPORT=6n9ihXhbWKPi8yAqG.i2kETSCRa.ug06Txh8EMrrRsliVQXFV\PYZus{}orx5HffqhQjuGHkNQrLOIRLLotGohL9s10wcYSPiQfI2wiPacKlJ3nYAXgM; P\PYZus{}INFO=hourui93@163.com|1476523293|1|study|11\PYZam{}12|jis\PYZam{}1476511733\PYZam{}mail163\PYZsh{}jis\PYZam{}320100\PYZsh{}10\PYZsh{}0\PYZsh{}0|151889\PYZam{}0|g37\PYZus{}client\PYZus{}check\PYZam{}mailsettings\PYZam{}mail163\PYZam{}study\PYZam{}blog|hourui93@163.com; JSESSIONID\PYZhy{}WYYY=189f31767098c3bd9d03d9b968c065daf43cbd4c1596732e4dcb471beafe2bf0605b85e969f92600064a977e0b64a24f0af7894ca898b696bd58ad5f39c8fce821ec2f81f826ea967215de4d10469e9bd672e75d25f116a9d309d360582a79620b250625859bc039161c78ab125a1e9bf5d291f6d4e4da30574ccd6bbab70b710e3f358f}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{3A1476594130342; \PYZus{}iuqxldmzr\PYZus{}=25; \PYZus{}\PYZus{}utma=94650624.1038096298.1476521011.1476588849.1476592408.6; \PYZus{}\PYZus{}utmb=94650624.11.10.1476592408; \PYZus{}\PYZus{}utmc=94650624; \PYZus{}\PYZus{}utmz=94650624.1476521011.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Host}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pragma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Upgrade\PYZhy{}Insecure\PYZhy{}Requests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{User\PYZhy{}Agent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{k}{def} \PY{n+nf}{save\PYZus{}albums}\PY{p}{(}\PY{n}{artist\PYZus{}id}\PY{p}{,} \PY{n}{albume\PYZus{}dic}\PY{p}{)}\PY{p}{:}
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{artist\PYZus{}id}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{limit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+             \PY{c+c1}{\PYZsh{} 获取歌手个人主页}
+             \PY{n}{r} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/artist/album}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{headers}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{n}{params}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 网页解析}
+             \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{content}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html.parser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{body} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{body}
+         
+             \PY{n}{albums} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tit s\PYZhy{}fc0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 获取所有专辑}
+         
+             \PY{k}{for} \PY{n}{album} \PY{o+ow}{in} \PY{n}{albums}\PY{p}{:}
+                 \PY{n}{albume\PYZus{}id} \PY{o}{=} \PY{n}{album}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/album?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{albume\PYZus{}dic}\PY{p}{[}\PY{n}{albume\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{artist\PYZus{}id}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{albume\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{save\PYZus{}albums}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{89659}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{albume\PYZus{}dic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{albume\PYZus{}dic}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} \{'2903111': '89659',
+          '37104113': '89659',
+          '37104284': '89659',
+          '37104348': '89659',
+          '37104857': '89659',
+          '37110077': '89659',
+          '37110141': '89659',
+          '37110256': '89659',
+          '37110395': '89659',
+          '37110462': '89659',
+          '37110655': '89659',
+          '37110751': '89659',
+          '37110871': '89659',
+          '37934081': '89659',
+          '37934219': '89659'\}
+\end{Verbatim}
+            
+    \hypertarget{ux6839ux636eux4e13ux8f91ux4fe1ux606fux722cux53d6ux6240ux6709ux7684ux6b4cux66f2ux4fe1ux606fmusic_by-_album.py}{%
+\section{根据专辑信息爬取所有的歌曲信息（music\_by
+\_album.py）}\label{ux6839ux636eux4e13ux8f91ux4fe1ux606fux722cux53d6ux6240ux6709ux7684ux6b4cux66f2ux4fe1ux606fmusic_by-_album.py}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{headers} \PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Encoding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip, deflate, sdch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zh\PYZhy{}CN,zh;q=0.8,en;q=0.6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cache\PYZhy{}Control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Connection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep\PYZhy{}alive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cookie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}ntes\PYZus{}nnid=7eced19b27ffae35dad3f8f2bf5885cd,1476521011210; \PYZus{}ntes\PYZus{}nuid=7eced19b27ffae35dad3f8f2bf5885cd; usertrack=c+5+hlgB7TgnsAmACnXtAg==; Province=025; City=025; NTES\PYZus{}PASSPORT=6n9ihXhbWKPi8yAqG.i2kETSCRa.ug06Txh8EMrrRsliVQXFV\PYZus{}orx5HffqhQjuGHkNQrLOIRLLotGohL9s10wcYSPiQfI2wiPacKlJ3nYAXgM; P\PYZus{}INFO=hourui93@163.com|1476523293|1|study|11\PYZam{}12|jis\PYZam{}1476511733\PYZam{}mail163\PYZsh{}jis\PYZam{}320100\PYZsh{}10\PYZsh{}0\PYZsh{}0|151889\PYZam{}0|g37\PYZus{}client\PYZus{}check\PYZam{}mailsettings\PYZam{}mail163\PYZam{}study\PYZam{}blog|hourui93@163.com; \PYZus{}ga=GA1.2.1405085820.1476521280; JSESSIONID\PYZhy{}WYYY=fb5288e1c5f667324f1636d020704cab2f27ee915622b114f89027cbf60c38be2af6b9cbef2223c1f2581e3502f11b86efd60891d6f61b6f783c0d55114f8269fa801df7352f5cc4c8259876e563a6bd0212b504a8997723a0593b21d5b3d9076d4fa38c098be68e3c5d36d342e4a8e40c1f73378cec0b5851bd8a628886edbdd23a7093}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{3A1476623819662; \PYZus{}iuqxldmzr\PYZus{}=25; \PYZus{}\PYZus{}utma=94650624.1038096298.1476521011.1476610320.1476622020.10; \PYZus{}\PYZus{}utmb=94650624.14.10.1476622020; \PYZus{}\PYZus{}utmc=94650624; \PYZus{}\PYZus{}utmz=94650624.1476521011.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Host}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pragma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZhy{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Upgrade\PYZhy{}Insecure\PYZhy{}Requests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{User\PYZhy{}Agent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36}\PY{l+s+s1}{\PYZsq{}}
+             \PY{p}{\PYZcb{}}
+         
+         \PY{k}{def} \PY{n+nf}{save\PYZus{}music}\PY{p}{(}\PY{n}{album\PYZus{}id}\PY{p}{,} \PY{n}{music\PYZus{}dic}\PY{p}{)}\PY{p}{:}
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{album\PYZus{}id}\PY{p}{\PYZcb{}}
+             \PY{c+c1}{\PYZsh{} 获取专辑对应的页面}
+             \PY{n}{r} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/album}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{headers}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{n}{params}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 网页解析}
+             \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{content}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html.parser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{body} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{body}
+         
+             \PY{n}{musics} \PY{o}{=} \PY{n}{body}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ul}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f\PYZhy{}hide}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{li}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 获取专辑的所有音乐}
+         
+             \PY{k}{for} \PY{n}{music} \PY{o+ow}{in} \PY{n}{musics}\PY{p}{:}
+                 \PY{n}{music} \PY{o}{=} \PY{n}{music}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{music\PYZus{}id} \PY{o}{=} \PY{n}{music}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/song?id=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{music\PYZus{}name} \PY{o}{=} \PY{n}{music}\PY{o}{.}\PY{n}{getText}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{music\PYZus{}dic}\PY{p}{[}\PY{n}{music\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{music\PYZus{}name}\PY{p}{,} \PY{n}{album\PYZus{}id}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{albume\PYZus{}dic}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} '37110871'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{music\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{save\PYZus{}music}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{37110871}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{music\PYZus{}dic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{music\PYZus{}dic}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} \{'527013176': ['อย่ารักใครข้างเดียว', '37110871'],
+          '527013177': ['จะไม่รับปาก', '37110871'],
+          '527013178': ['เจ้าหญิงนิทรา', '37110871'],
+          '527013179': ['หุ่นกระป๋อง', '37110871'],
+          '527013180': ['เธอจะอยู่กับฉันตลอดไป', '37110871'],
+          '527013181': ['เมืองคนเหล็ก', '37110871'],
+          '527013182': ['เพลงผีเสื้อ', '37110871'],
+          '527013183': ['วังวน', '37110871'],
+          '527013184': ['ปฏิเสธรัก', '37110871'],
+          '527013185': ['ชีวิต มิตรภาพ ความรัก', '37110871'],
+          '527013186': ['ปฏิเสธไม่ได้ว่ารักเธอ Feat. แบงค์ แคลช', '37110871'],
+          '527013187': ['เพลงผีเสื้อ', '37110871'],
+          '527013188': ['ชีวิต มิตรภาพ ความรัก Concert', '37110871']\}
+\end{Verbatim}
+            
+    \hypertarget{ux6839ux636eux6b4cux66f2ux4fe1ux606fux722cux53d6ux5176ux8bc4ux8bbaux6761ux6570comments_by-_music.py}{%
+\section{根据歌曲信息爬取其评论条数（comments\_by
+\_music.py}\label{ux6839ux636eux6b4cux66f2ux4fe1ux606fux722cux53d6ux5176ux8bc4ux8bbaux6761ux6570comments_by-_music.py}}
+
+    http://music.163.com/\#/song?id=516997458
+
+很遗憾的是评论数虽然也在详情页内，但是网易云音乐做了防爬处理， -
+采用AJAX调用评论数API的方式填充评论相关数据， -
+异步的特性导致我们爬到的页面中评论数是空，
+
+我们就找一找这个API吧，通关观察XHR请求发现是下面这个家伙..
+
+响应结果很丰富呢，所有评论相关的数据都有，不过经过观察发现这个API是经过加密处理的，不过没关系\ldots{}
+
+https://blog.csdn.net/python233/article/details/72825003
+
+https://www.zhihu.com/question/36081767
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{headers} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Host}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Connection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep\PYZhy{}alive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Content\PYZhy{}Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{484}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cache\PYZhy{}Control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZhy{}age=0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{User\PYZhy{}Agent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Content\PYZhy{}Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{application/x\PYZhy{}www\PYZhy{}form\PYZhy{}urlencoded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*/*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Encoding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip, deflate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zh\PYZhy{}CN,zh;q=0.8,en;q=0.6,zh\PYZhy{}TW;q=0.4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cookie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JSESSIONID\PYZhy{}WYYY=b66d89ed74ae9e94ead89b16e475556e763dd34f95e6ca357d06830a210abc7b685e82318b9d1d5b52ac4f4b9a55024c7a34024fddaee852404ed410933db994dcc0e398f61e670bfeea81105cbe098294e39ac566e1d5aa7232df741870ba1fe96e5cede8372ca587275d35c1a5d1b23a11e274a4c249afba03e20fa2dafb7a16eebdf6}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{3A1476373826753; \PYZus{}iuqxldmzr\PYZus{}=25; \PYZus{}ntes\PYZus{}nnid=7fa73e96706f26f3ada99abba6c4a6b2,1476372027128; \PYZus{}ntes\PYZus{}nuid=7fa73e96706f26f3ada99abba6c4a6b2; \PYZus{}\PYZus{}utma=94650624.748605760.1476372027.1476372027.1476372027.1; \PYZus{}\PYZus{}utmb=94650624.4.10.1476372027; \PYZus{}\PYZus{}utmc=94650624; \PYZus{}\PYZus{}utmz=94650624.1476372027.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csrf\PYZus{}token}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{params}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5L+s/X1qDy33tb2sjT6to2T4oxv89Fjg1aYRkjgzpNPR6hgCpp0YVjNoTLQAwWu9VYvKROPZQj6qTpBK+sUeJovyNHsnU9/StEfZwCOcKfECFFtAvoNIpulj1TDOtBir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{encSecKey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{59079f3e07d6e240410018dc871bf9364f122b720c0735837d7916ac78d48a79ec06c6307e6a0e576605d6228bd0b377a96e1a7fc7c7ddc8f6a3dc6cc50746933352d4ec5cbe7bddd6dcb94de085a3b408d895ebfdf2f43a7c72fc783512b3c9efb860679a88ef21ccec5ff13592be450a1edebf981c0bf779b122ddbd825492}\PY{l+s+s1}{\PYZsq{}}
+              
+          \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux7ffbux9875ux7684ux5b9eux73b0}{%
+\subsection{翻页的实现}\label{ux7ffbux9875ux7684ux5b9eux73b0}}
+
+limit是一页的数量，offset往后的偏移。 -
+比如limit是20，offset是40，就展示第三页的
+
+http://music.163.com/api/v1/resource/comments/R\_SO\_4\_516997458?limit=20\&offset=0
+
+http://music.163.com/api/v1/resource/comments/R\_SO\_4\_516997458?limit=20\&offset=20
+
+http://music.163.com/api/v1/resource/comments/R\_SO\_4\_516997458?limit=20\&offset=40
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{url}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+http://music.163.com/api/v1/resource/comments/R\_SO\_4\_516997458?limit=20\&offset=0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{music\PYZus{}id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{516997458}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/api/v1/resource/comments/R\PYZus{}SO\PYZus{}4\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n}{music\PYZus{}id} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?limit=20\PYZam{}offset=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{offset}\PY{p}{)}
+          \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{headers}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+          \PY{n}{cj} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cj}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}163}]:} dict\_keys(['total', 'topComments', 'hotComments', 'moreHot', 'more', 'userId', 'code', 'isMusician', 'comments'])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hotComments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{topComments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}164}]:} (8054, 20, 15, 0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}165}]:} \{'beReplied': [],
+           'commentId': 1112523641,
+           'content': '喜欢双笙，喜欢这首歌',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 1,
+           'pendantData': None,
+           'time': 1525904882188,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/Eklu6D8QoR1Hb5UhLhCzPw==/109951163288324813.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '狂妄嘻嘻',
+            'remarkName': None,
+            'userId': 1451756393,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{20}
+          \PY{n}{music\PYZus{}id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{516997458}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com/api/v1/resource/comments/R\PYZus{}SO\PYZus{}4\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n}{music\PYZus{}id} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?limit=20\PYZam{}offset=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{offset}\PY{p}{)}
+          \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{headers}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+          \PY{n}{cj} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cj}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} dict\_keys(['total', 'topComments', 'more', 'userId', 'isMusician', 'code', 'comments'])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}161}]:} 20
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{cj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}162}]:} \{'beReplied': [],
+           'commentId': 1107837178,
+           'content': '冥月声音好听好温柔[爱心]表白',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 3,
+           'pendantData': None,
+           'time': 1525515089450,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/suhvzXk2pEUOaeHUPU0aQQ==/109951163173870029.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '黴祇',
+            'remarkName': None,
+            'userId': 619018018,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
+    \hypertarget{ux53e6ux5916ux4e00ux79cdux65b9ux6cd5}{%
+\subsection{另外一种方法}\label{ux53e6ux5916ux4e00ux79cdux65b9ux6cd5}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{k+kn}{from} \PY{n+nn}{Crypto}\PY{n+nn}{.}\PY{n+nn}{Cipher} \PY{k}{import} \PY{n}{AES}
+          \PY{k+kn}{import} \PY{n+nn}{base64}
+          \PY{k+kn}{import} \PY{n+nn}{requests}
+          \PY{k+kn}{import} \PY{n+nn}{json}
+          \PY{k+kn}{import} \PY{n+nn}{time}
+          
+          \PY{c+c1}{\PYZsh{} headers}
+          \PY{n}{headers} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Host}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Connection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep\PYZhy{}alive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Content\PYZhy{}Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{484}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cache\PYZhy{}Control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZhy{}age=0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://music.163.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{User\PYZhy{}Agent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Content\PYZhy{}Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{application/x\PYZhy{}www\PYZhy{}form\PYZhy{}urlencoded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*/*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Encoding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip, deflate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accept\PYZhy{}Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zh\PYZhy{}CN,zh;q=0.8,en;q=0.6,zh\PYZhy{}TW;q=0.4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cookie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JSESSIONID\PYZhy{}WYYY=b66d89ed74ae9e94ead89b16e475556e763dd34f95e6ca357d06830a210abc7b685e82318b9d1d5b52ac4f4b9a55024c7a34024fddaee852404ed410933db994dcc0e398f61e670bfeea81105cbe098294e39ac566e1d5aa7232df741870ba1fe96e5cede8372ca587275d35c1a5d1b23a11e274a4c249afba03e20fa2dafb7a16eebdf6}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{3A1476373826753; \PYZus{}iuqxldmzr\PYZus{}=25; \PYZus{}ntes\PYZus{}nnid=7fa73e96706f26f3ada99abba6c4a6b2,1476372027128; \PYZus{}ntes\PYZus{}nuid=7fa73e96706f26f3ada99abba6c4a6b2; \PYZus{}\PYZus{}utma=94650624.748605760.1476372027.1476372027.1476372027.1; \PYZus{}\PYZus{}utmb=94650624.4.10.1476372027; \PYZus{}\PYZus{}utmc=94650624; \PYZus{}\PYZus{}utmz=94650624.1476372027.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{p}{\PYZcb{}}
+          
+          
+          
+          \PY{c+c1}{\PYZsh{}获取params}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}params}\PY{p}{(}\PY{n}{first\PYZus{}param}\PY{p}{,} \PY{n}{forth\PYZus{}param}\PY{p}{)}\PY{p}{:}
+              \PY{n}{iv} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0102030405060708}\PY{l+s+s2}{\PYZdq{}}
+              \PY{n}{first\PYZus{}key} \PY{o}{=} \PY{n}{forth\PYZus{}param}
+              \PY{n}{second\PYZus{}key} \PY{o}{=} \PY{l+m+mi}{16} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}
+              \PY{n}{h\PYZus{}encText} \PY{o}{=} \PY{n}{AES\PYZus{}encrypt}\PY{p}{(}\PY{n}{first\PYZus{}param}\PY{p}{,} \PY{n}{first\PYZus{}key}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{iv}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{h\PYZus{}encText} \PY{o}{=} \PY{n}{AES\PYZus{}encrypt}\PY{p}{(}\PY{n}{h\PYZus{}encText}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{second\PYZus{}key}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{iv}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{h\PYZus{}encText}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} 获取encSecKey}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}encSecKey}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{encSecKey} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{257348aecb5e556c066de214e531faadd1c55d814f9be95fd06d6bff9f4c7a41f831f6394d5a3fd2e3881736d94a02ca919d952872e7d0a50ebfa1769a7a62d512f5f1ca21aec60bc3819a9c3ffca5eca9a0dba6d6f7249b06f5965ecfff3695b54e1c28f3f624750ed39e7de08fc8493242e26dbc4484a01c76f739e135637c}\PY{l+s+s2}{\PYZdq{}}
+              \PY{k}{return} \PY{n}{encSecKey}
+          
+          
+          \PY{c+c1}{\PYZsh{} 解AES秘}
+          \PY{k}{def} \PY{n+nf}{AES\PYZus{}encrypt}\PY{p}{(}\PY{n}{text}\PY{p}{,} \PY{n}{key}\PY{p}{,} \PY{n}{iv}\PY{p}{)}\PY{p}{:}
+              \PY{n}{pad} \PY{o}{=} \PY{l+m+mi}{16} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{16}
+              \PY{n}{text} \PY{o}{=} \PY{n}{text} \PY{o}{+} \PY{n}{pad} \PY{o}{*} \PY{n+nb}{chr}\PY{p}{(}\PY{n}{pad}\PY{p}{)}
+              \PY{n}{encryptor} \PY{o}{=} \PY{n}{AES}\PY{o}{.}\PY{n}{new}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{AES}\PY{o}{.}\PY{n}{MODE\PYZus{}CBC}\PY{p}{,} \PY{n}{iv}\PY{p}{)}
+              \PY{n}{encrypt\PYZus{}text} \PY{o}{=} \PY{n}{encryptor}\PY{o}{.}\PY{n}{encrypt}\PY{p}{(}\PY{n}{text}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{encrypt\PYZus{}text} \PY{o}{=} \PY{n}{base64}\PY{o}{.}\PY{n}{b64encode}\PY{p}{(}\PY{n}{encrypt\PYZus{}text}\PY{p}{)}
+              \PY{k}{return} \PY{n}{encrypt\PYZus{}text}
+          
+          
+          \PY{c+c1}{\PYZsh{} 获取json数据}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}json}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{:}
+              \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{headers}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+              \PY{k}{return} \PY{n}{response}\PY{o}{.}\PY{n}{content}
+          
+          
+          \PY{c+c1}{\PYZsh{} 传入post数据}
+          \PY{k}{def} \PY{n+nf}{crypt\PYZus{}api}\PY{p}{(}\PY{n+nb}{id}\PY{p}{,} \PY{n}{offset}\PY{p}{)}\PY{p}{:}
+              \PY{n}{url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://music.163.com/weapi/v1/resource/comments/R\PYZus{}SO\PYZus{}4\PYZus{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{/?csrf\PYZus{}token=}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{id}
+              \PY{n}{first\PYZus{}param} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{rid:}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, offset:}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, total:}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{true}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, limit:}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{20}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, csrf\PYZus{}token:}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{offset}
+              \PY{n}{forth\PYZus{}param} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0CoJUm6Qyw8W8jud}\PY{l+s+s2}{\PYZdq{}}
+              \PY{n}{params} \PY{o}{=} \PY{n}{get\PYZus{}params}\PY{p}{(}\PY{n}{first\PYZus{}param}\PY{p}{,} \PY{n}{forth\PYZus{}param}\PY{p}{)}
+              \PY{n}{encSecKey} \PY{o}{=} \PY{n}{get\PYZus{}encSecKey}\PY{p}{(}\PY{p}{)}
+              \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{params}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{params}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{encSecKey}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{encSecKey}
+              \PY{p}{\PYZcb{}}
+              \PY{k}{return} \PY{n}{url}\PY{p}{,} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n+nb}{id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{516997458}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{crypt\PYZus{}api}\PY{p}{(}\PY{n+nb}{id}\PY{p}{,} \PY{n}{offset}\PY{p}{)}
+          \PY{n}{json\PYZus{}text} \PY{o}{=} \PY{n}{get\PYZus{}json}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+          \PY{n}{json\PYZus{}dict} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{json\PYZus{}text}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{comments\PYZus{}sum} \PY{o}{=} \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{comments\PYZus{}sum}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}138}]:} 8054
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}139}]:} 20
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}140}]:} \{'beReplied': [],
+           'commentId': 1112523641,
+           'content': '喜欢双笙，喜欢这首歌',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 1,
+           'pendantData': None,
+           'time': 1525904882188,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/Eklu6D8QoR1Hb5UhLhCzPw==/109951163288324813.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '狂妄嘻嘻',
+            'remarkName': None,
+            'userId': 1451756393,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}141}]:} \{'beReplied': [\{'content': '我们历史老师是一个年轻的小伙子。那是个阳光明媚的中午，他拖堂拖了很久，喇叭里响起了学校广播“校园之声”的开场白，接着就是这首歌。老师听到这首歌前奏后，自以为是地说一定是播音员自己唱的。我们都在下面反驳他，说人家歌就是这样的。。\textbackslash{}n而现在，距中考只有58天了，毕业后，就回不去了。',
+             'status': 0,
+             'user': \{'authStatus': 0,
+              'avatarUrl': 'http://p1.music.126.net/gm976KYbWTvYvExzjBNeaw==/109951163217371336.jpg',
+              'expertTags': None,
+              'experts': None,
+              'locationInfo': None,
+              'nickname': '惴洛',
+              'remarkName': None,
+              'userId': 1325932231,
+              'userType': 0,
+              'vipType': 0\}\}],
+           'commentId': 1112261542,
+           'content': '还有不到一个月了高一学姐祝你考试加油哦',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 0,
+           'pendantData': None,
+           'time': 1525876023865,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/kAuCCkW-fcC7yu4wix9z5Q==/109951163144186242.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '土园yy',
+            'remarkName': None,
+            'userId': 275653796,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{20}
+          \PY{n+nb}{id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{516997458}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{crypt\PYZus{}api}\PY{p}{(}\PY{n+nb}{id}\PY{p}{,} \PY{n}{offset}\PY{p}{)}
+          \PY{n}{json\PYZus{}text} \PY{o}{=} \PY{n}{get\PYZus{}json}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+          \PY{n}{json\PYZus{}dict} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{json\PYZus{}text}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{comments\PYZus{}sum} \PY{o}{=} \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}135}]:} \{'beReplied': [],
+           'commentId': 1107837178,
+           'content': '冥月声音好听好温柔[爱心]表白',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 3,
+           'pendantData': None,
+           'time': 1525515089450,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/suhvzXk2pEUOaeHUPU0aQQ==/109951163173870029.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '黴祇',
+            'remarkName': None,
+            'userId': 619018018,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{40}
+          \PY{n+nb}{id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{516997458}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{crypt\PYZus{}api}\PY{p}{(}\PY{n+nb}{id}\PY{p}{,} \PY{n}{offset}\PY{p}{)}
+          \PY{n}{json\PYZus{}text} \PY{o}{=} \PY{n}{get\PYZus{}json}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+          \PY{n}{json\PYZus{}dict} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{json\PYZus{}text}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{comments\PYZus{}sum} \PY{o}{=} \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{json\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:} \{'beReplied': [],
+           'commentId': 1102303635,
+           'content': '找这首歌找了好久了！！无厘头的找，今天无意居然听到了(*\^{}▽\^{})/★*☆',
+           'isRemoveHotComment': False,
+           'liked': False,
+           'likedCount': 1,
+           'pendantData': None,
+           'time': 1525072647936,
+           'user': \{'authStatus': 0,
+            'avatarUrl': 'http://p1.music.126.net/fU8tvMVN2f5WkSUZehQ21Q==/3274345636764863.jpg',
+            'expertTags': None,
+            'experts': None,
+            'locationInfo': None,
+            'nickname': '黎诺0',
+            'remarkName': None,
+            'userId': 129375977,
+            'userType': 0,
+            'vipType': 0\}\}
+\end{Verbatim}
+            
 
     % Add a bibliography block to the postdoc
     
