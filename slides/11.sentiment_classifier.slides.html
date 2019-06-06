@@ -11952,6 +11952,16 @@ a.anchor-link {
 
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="LIWC-&amp;-TextMind">LIWC &amp; TextMind<a class="anchor-link" href="#LIWC-&amp;-TextMind">&#182;</a></h1><p><a href="http://ccpl.psych.ac.cn/textmind/">http://ccpl.psych.ac.cn/textmind/</a></p>
+<p>“文心(TextMind)”中文心理分析系统是由中科院心理所计算网络心理实验室研发的，针对中文文本进行语言分析的软件系统，通过“文心”，您可以便捷地分析文本中使用的不同类别语言的程度、偏好等特点。针对中国大陆地区简体环境下的语言特点，参照LIWC2007和正體中文C-LIWC词库，我们开发了“文心（TextMind）”中文心理分析系统。“文心”为用户提供从简体中文自动分词，到语言心理分析的一揽子分析解决方案，其词库、文字和符号等处理方法专门针对简体中文语境，词库分类体系也与LIWC兼容一致。</p>
+
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -11974,10 +11984,10 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
 
 <span class="n">pos_tweets</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;I love this car&#39;</span><span class="p">,</span> <span class="s1">&#39;positive&#39;</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">&#39;This view is amazing&#39;</span><span class="p">,</span> <span class="s1">&#39;positive&#39;</span><span class="p">),</span>
@@ -11999,10 +12009,10 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">sentiment</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pos_tweets</span> <span class="o">+</span> <span class="n">neg_tweets</span><span class="p">:</span>
     <span class="n">words_filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">]</span>
     <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">words_filtered</span><span class="p">,</span> <span class="n">sentiment</span><span class="p">))</span>
@@ -12019,7 +12029,7 @@ a.anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -12037,10 +12047,10 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">test_tweets</span> <span class="o">=</span> <span class="p">[</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_tweets</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">([</span><span class="s1">&#39;feel&#39;</span><span class="p">,</span> <span class="s1">&#39;happy&#39;</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;morning&#39;</span><span class="p">],</span> <span class="s1">&#39;positive&#39;</span><span class="p">),</span>
     <span class="p">([</span><span class="s1">&#39;larry&#39;</span><span class="p">,</span> <span class="s1">&#39;friend&#39;</span><span class="p">],</span> <span class="s1">&#39;positive&#39;</span><span class="p">),</span>
     <span class="p">([</span><span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;that&#39;</span><span class="p">,</span> <span class="s1">&#39;man&#39;</span><span class="p">],</span> <span class="s1">&#39;negative&#39;</span><span class="p">),</span>
@@ -12064,10 +12074,10 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># get the word lists of tweets</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the word lists of tweets</span>
 <span class="k">def</span> <span class="nf">get_words_in_tweets</span><span class="p">(</span><span class="n">tweets</span><span class="p">):</span>
     <span class="n">all_words</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">sentiment</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
@@ -12094,13 +12104,13 @@ a.anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;amazing about concert excited friend best horrible this enemy great love morning not feel tired forward car looking view the like&#39;</pre>
+<pre>&#39;friend tired great like amazing this looking horrible forward excited best not concert enemy love view feel the car morning about&#39;</pre>
 </div>
 
 </div>
@@ -12120,10 +12130,10 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
     <span class="n">document_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
     <span class="n">features</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_features</span><span class="p">:</span>
@@ -12141,7 +12151,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">apply_features</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">apply_features</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12205,7 +12215,7 @@ apply_features(feature_func, toks, labeled=None)
 <div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">training_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">training_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -12256,10 +12266,10 @@ apply_features(feature_func, toks, labeled=None)
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">training_set</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">apply_features</span><span class="p">(</span><span class="n">extract_features</span><span class="p">,</span>\
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">training_set</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">apply_features</span><span class="p">(</span><span class="n">extract_features</span><span class="p">,</span>\
                                                  <span class="n">tweets</span><span class="p">)</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
 </pre></div>
@@ -12274,7 +12284,7 @@ apply_features(feature_func, toks, labeled=None)
 <div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># You may want to know how to define the ‘train’ method in NLTK here:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># You may want to know how to define the ‘train’ method in NLTK here:</span>
 <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">labeled_featuresets</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">probability</span><span class="o">.</span><span class="n">ELEProbDist</span><span class="p">):</span>
     <span class="c1"># Create the P(label) distribution</span>
     <span class="n">label_probdist</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">(</span><span class="n">label_freqdist</span><span class="p">)</span>
@@ -12291,10 +12301,10 @@ apply_features(feature_func, toks, labeled=None)
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">tweet_positive</span> <span class="o">=</span> <span class="s1">&#39;Larry is my friend&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweet_positive</span> <span class="o">=</span> <span class="s1">&#39;Harry is my friend&#39;</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">extract_features</span><span class="p">(</span><span class="n">tweet_positive</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
 </pre></div>
 
@@ -12308,7 +12318,7 @@ apply_features(feature_func, toks, labeled=None)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -12325,10 +12335,10 @@ apply_features(feature_func, toks, labeled=None)
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">tweet_negative</span> <span class="o">=</span> <span class="s1">&#39;Larry is not my friend&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweet_negative</span> <span class="o">=</span> <span class="s1">&#39;Larry is not my friend&#39;</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">extract_features</span><span class="p">(</span><span class="n">tweet_negative</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
 </pre></div>
 
@@ -12342,7 +12352,7 @@ apply_features(feature_func, toks, labeled=None)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -12359,10 +12369,10 @@ apply_features(feature_func, toks, labeled=None)
 </div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Don’t be too positive, let’s try another example:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Don’t be too positive, let’s try another example:</span>
 <span class="n">tweet_negative2</span> <span class="o">=</span> <span class="s1">&#39;Your song is annoying&#39;</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">extract_features</span><span class="p">(</span><span class="n">tweet_negative2</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
 </pre></div>
@@ -12377,7 +12387,7 @@ apply_features(feature_func, toks, labeled=None)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[19]:</div>
 
 
 
@@ -12394,10 +12404,10 @@ apply_features(feature_func, toks, labeled=None)
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">classify_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">classify_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">extract_features</span><span class="p">(</span><span class="n">tweet</span><span class="p">))</span> 
     <span class="c1"># nltk.word_tokenize(tweet)</span>
 
@@ -12407,7 +12417,7 @@ apply_features(feature_func, toks, labeled=None)
     <span class="k">if</span> <span class="n">classify_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">tweet</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
         <span class="n">accuracy</span> <span class="o">-=</span> <span class="mi">1</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total accuracy: </span><span class="si">%f%%</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">/20).&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">accuracy</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total accuracy: </span><span class="si">%f%%</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">/20).&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">accuracy</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12446,11 +12456,11 @@ apply_features(feature_func, toks, labeled=None)
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># nltk有哪些分类器呢？</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nltk有哪些分类器呢？</span>
 <span class="n">nltk_classifiers</span> <span class="o">=</span> <span class="nb">dir</span><span class="p">(</span><span class="n">nltk</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nltk_classifiers</span><span class="p">:</span>
     <span class="k">if</span> <span class="s1">&#39;Classifier&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12488,11 +12498,11 @@ WekaClassifier
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
-<span class="kn">from</span> <span class="nn">nltk.classify.scikitlearn</span> <span class="kn">import</span> <span class="n">SklearnClassifier</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">nltk.classify.scikitlearn</span> <span class="k">import</span> <span class="n">SklearnClassifier</span>
 <span class="n">classif</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">())</span>
 <span class="n">svm_classifier</span> <span class="o">=</span> <span class="n">classif</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
 </pre></div>
@@ -12504,10 +12514,10 @@ WekaClassifier
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Don’t be too positive, let’s try another example:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Don’t be too positive, let’s try another example:</span>
 <span class="n">tweet_negative2</span> <span class="o">=</span> <span class="s1">&#39;Your song is annoying&#39;</span>
 <span class="n">svm_classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">extract_features</span><span class="p">(</span><span class="n">tweet_negative2</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
 </pre></div>
@@ -12522,7 +12532,7 @@ WekaClassifier
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -12586,7 +12596,7 @@ WekaClassifier
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="k">import</span> <span class="n">TextBlob</span>
 
 <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">The titular threat of The Blob has always struck me as the ultimate movie</span>
@@ -12608,7 +12618,7 @@ WekaClassifier
                     <span class="c1">#            &#39;amoeba-like mass&#39;, ...])</span>
 
 <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">blob</span><span class="o">.</span><span class="n">sentences</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span><span class="p">)</span>
 <span class="c1"># 0.060</span>
 <span class="c1"># -0.341</span>
 
@@ -12699,8 +12709,8 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">graphlab</span> <span class="kn">as</span> <span class="nn">gl</span>
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">graphlab</span> <span class="k">as</span> <span class="nn">gl</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                                 <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
                                 <span class="n">column_type_hints</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
                                                      <span class="s1">&#39;sentiment&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
@@ -12750,9 +12760,9 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">graphlab</span> <span class="kn">as</span> <span class="nn">gl</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">graphlab</span> <span class="k">as</span> <span class="nn">gl</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
 
 <span class="n">gl</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="s1">&#39;ipynb&#39;</span><span class="p">)</span>
 </pre></div>
@@ -12788,7 +12798,7 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">traindata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/labeledTrainData.tsv&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">traindata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/labeledTrainData.tsv&quot;</span>
 <span class="n">testdata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/testData.tsv&quot;</span>
 </pre></div>
 
@@ -12819,7 +12829,7 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                                          <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
                                          <span class="n">column_type_hints</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
                                                               <span class="s1">&#39;sentiment&#39;</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
@@ -12900,7 +12910,7 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span>
 </pre></div>
 
 </div>
@@ -13007,7 +13017,7 @@ Then, I will demonstrate how these classifiers can be utilized to solve Kaggle's
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">movies_reviews_data</span> <span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">movies_reviews_data</span> <span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13030,7 +13040,7 @@ We can view the values of this new column using the following command.</p>
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span><span class="c1">#[[&#39;review&#39;,&#39;1grams features&#39;]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span><span class="c1">#[[&#39;review&#39;,&#39;1grams features&#39;]]</span>
 </pre></div>
 
 </div>
@@ -13140,7 +13150,7 @@ We can view the values of this new column using the following command.</p>
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">movies_reviews_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">movies_reviews_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13162,7 +13172,7 @@ We can view the values of this new column using the following command.</p>
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">model_1</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span> \
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_1</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span> \
                                <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -13776,7 +13786,7 @@ PROGRESS: Selecting SVMClassifier based on validation set performance.
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">result1</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result1</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13798,10 +13808,10 @@ PROGRESS: Selecting SVMClassifier based on validation set performance.
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">print_statistics</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">30</span>
-    <span class="k">print</span> <span class="s2">&quot;Accuracy        : &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span>
-    <span class="k">print</span> <span class="s2">&quot;Confusion Matrix: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;confusion_matrix&quot;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_statistics</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">30</span>
+    <span class="nb">print</span> <span class="s2">&quot;Accuracy        : &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="s2">&quot;Confusion Matrix: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;confusion_matrix&quot;</span><span class="p">]</span>
 <span class="n">print_statistics</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
 </pre></div>
 
@@ -13871,7 +13881,7 @@ Confusion Matrix:
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;2grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;2grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">movies_reviews_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13884,7 +13894,7 @@ Confusion Matrix:
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">movies_reviews_data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_reviews_data</span>
 </pre></div>
 
 </div>
@@ -14005,7 +14015,7 @@ Confusion Matrix:
 <div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">movies_reviews_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">movies_reviews_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">model_2</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">,</span><span class="s1">&#39;2grams features&#39;</span><span class="p">])</span>
 <span class="n">result2</span> <span class="o">=</span> <span class="n">model_2</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
 </pre></div>
@@ -14611,7 +14621,7 @@ PROGRESS: Selecting LogisticClassifier based on validation set performance.
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">print_statistics</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_statistics</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -14680,17 +14690,17 @@ Confusion Matrix:
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">traindata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/labeledTrainData.tsv&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">traindata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/labeledTrainData.tsv&quot;</span>
 <span class="n">testdata_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/testData.tsv&quot;</span>
 <span class="c1">#creating classifier using all 25,000 reviews</span>
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">traindata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
                                 <span class="n">column_type_hints</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;sentiment&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;review&#39;</span><span class="p">:</span><span class="nb">str</span> <span class="p">}</span> <span class="p">)</span>
 <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;2grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="bp">cls</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">,</span><span class="s1">&#39;2grams features&#39;</span><span class="p">])</span>
 <span class="c1">#creating the test dataset</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">testdata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">testdata_path</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">quote_char</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> 
                                <span class="n">column_type_hints</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;review&#39;</span><span class="p">:</span><span class="nb">str</span> <span class="p">}</span> <span class="p">)</span>
 <span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;1grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;2grams features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_ngrams</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
@@ -14699,7 +14709,7 @@ Confusion Matrix:
 <span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">test_data</span><span class="p">)[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="c1">#saving the prediction to a CSV for submission</span>
-<span class="n">test_data</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/predictions.csv&quot;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="n">test_data</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/Users/datalab/bigdata/kaggle_popcorn_data/predictions.csv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>

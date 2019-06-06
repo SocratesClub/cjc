@@ -12001,6 +12001,37 @@ a.anchor-link {
 
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span> python --version
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Python 2.7.14 :: Anaconda, Inc.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12054,17 +12085,17 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="k">import</span> <span class="n">SGraph</span><span class="p">,</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">Edge</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="kn">import</span> <span class="n">SGraph</span><span class="p">,</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">Edge</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">SGraph</span><span class="p">()</span>
 <span class="n">verts</span> <span class="o">=</span> <span class="p">[</span><span class="n">Vertex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;labrador&#39;</span><span class="p">}),</span>
          <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;labrador&#39;</span><span class="p">}),</span>
          <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;vizsla&#39;</span><span class="p">})]</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">(</span><span class="n">verts</span><span class="p">)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12092,7 +12123,7 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO] graphlab.cython.cy_server: GraphLab Create v2.1 started. Logging: /tmp/graphlab_server_1522132034.log
+<pre>[INFO] graphlab.cython.cy_server: GraphLab Create v2.1 started. Logging: /tmp/graphlab_server_1551671450.log
 </pre>
 </div>
 </div>
@@ -12114,17 +12145,17 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="k">import</span> <span class="n">SGraph</span><span class="p">,</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">Edge</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="kn">import</span> <span class="n">SGraph</span><span class="p">,</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">Edge</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">SGraph</span><span class="p">()</span>
 <span class="n">verts</span> <span class="o">=</span> <span class="p">[</span><span class="n">Vertex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;labrador&#39;</span><span class="p">}),</span>
          <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;labrador&#39;</span><span class="p">}),</span>
          <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;breed&#39;</span><span class="p">:</span> <span class="s1">&#39;vizsla&#39;</span><span class="p">})]</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">(</span><span class="n">verts</span><span class="p">)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span> <span class="n">g</span>
+<span class="k">print</span> <span class="n">g</span>
 </pre></div>
 
 </div>
@@ -12134,28 +12165,6 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>This non-commercial license of GraphLab Create for academic use is assigned to wangchengjun@nju.edu.cn and will expire on May 12, 2018.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2017-05-13 09:39:05,184 [INFO] graphlab.cython.cy_server, 176: GraphLab Create v1.8.5 started. Logging: /tmp/graphlab_server_1494639542.log
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
@@ -12174,10 +12183,10 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12194,7 +12203,7 @@ No matching distribution found for graphlab-create&gt;=2.1 (from GraphLab-Create
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Canvas is accessible via web browser at the URL: http://localhost:53086/index.html
+<pre>Canvas is accessible via web browser at the URL: http://localhost:62302/index.html
 Opening Canvas in default web browser.
 </pre>
 </div>
@@ -12206,16 +12215,16 @@ Opening Canvas in default web browser.
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="k">import</span> <span class="n">SFrame</span><span class="p">,</span><span class="n">SGraph</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">graphlab</span> <span class="kn">import</span> <span class="n">SFrame</span><span class="p">,</span><span class="n">SGraph</span>
 <span class="n">edge_data</span> <span class="o">=</span> <span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/bond_edges.csv&#39;</span><span class="p">)</span>
     <span class="c1">#&#39;https://static.turi.com/datasets/bond/bond_edges.csv&#39;)</span>
 
 <span class="n">g</span> <span class="o">=</span> <span class="n">SGraph</span><span class="p">()</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="n">edge_data</span><span class="p">,</span> <span class="n">src_field</span><span class="o">=</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="n">dst_field</span><span class="o">=</span><span class="s1">&#39;dst&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12245,7 +12254,7 @@ Opening Canvas in default web browser.
 
 
 <div class="output_html rendered_html output_subarea ">
-<pre>Parsing completed. Parsed 20 lines in 0.008644 secs.</pre>
+<pre>Parsing completed. Parsed 20 lines in 0.022952 secs.</pre>
 </div>
 
 </div>
@@ -12286,7 +12295,7 @@ the column_type_hints argument
 
 
 <div class="output_html rendered_html output_subarea ">
-<pre>Parsing completed. Parsed 20 lines in 0.008051 secs.</pre>
+<pre>Parsing completed. Parsed 20 lines in 0.009524 secs.</pre>
 </div>
 
 </div>
@@ -12311,7 +12320,7 @@ the column_type_hints argument
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vertex_data</span> <span class="o">=</span> <span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://static.turi.com/datasets/bond/bond_vertices.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">vertex_data</span> <span class="o">=</span> <span class="n">SFrame</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://static.turi.com/datasets/bond/bond_vertices.csv&#39;</span><span class="p">)</span>
 
 <span class="n">g</span> <span class="o">=</span> <span class="n">SGraph</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="n">vertex_data</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edge_data</span><span class="p">,</span> <span class="n">vid_field</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
            <span class="n">src_field</span><span class="o">=</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="n">dst_field</span><span class="o">=</span><span class="s1">&#39;dst&#39;</span><span class="p">)</span>
@@ -12408,11 +12417,11 @@ the column_type_hints argument
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">vlabel</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;James Bond&#39;</span><span class="p">,</span> <span class="s1">&#39;Moneypenny&#39;</span><span class="p">],</span> \
-       <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">vlabel</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;James Bond&#39;</span><span class="p">,</span> <span class="s1">&#39;Moneypenny&#39;</span><span class="p">],</span> \
+       <span class="n">arrows</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12429,8 +12438,7 @@ the column_type_hints argument
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Canvas is accessible via web browser at the URL: http://localhost:53439/index.html
-Opening Canvas in default web browser.
+<pre>Canvas is updated and available in a tab in the default browser.
 </pre>
 </div>
 </div>

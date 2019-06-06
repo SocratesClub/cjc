@@ -17,12 +17,12 @@
 
 | 时间          |  上午         |    下午   |晚上        | 课时数量   |
 | -------------|:-------------:|:-------------:|:-------------:|-----:|
-| 2018-04-27 周五 | 9:00-12:00 | 14:00-17:00 | 作业     | 6学时|
-| 2018-04-28 周六 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
-| 2018-04-29 周天 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
-| 2018-05-04 周五 | 9:00-12:00 | 14:00-17:00 | 作业     | 6学时|
-| 2018-05-05 周六 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
-| 2018-05-06 周天 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
+| 2019-06-7 周五 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
+| 2019-06-8 周六 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
+| 2019-06-9 周天 | 9:00-12:00 | 14:00-17:00 |  | 6学时|
+| 2019-06-14 周五 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
+| 2019-06-15 周六 | 9:00-12:00 | 14:00-17:00 | 作业&答疑 | 6学时|
+| 2019-06-16 周天 | 9:00-12:00 | 14:00-17:00 |  | 6学时|
 
 # 授课计划
 
@@ -34,7 +34,7 @@
 - 六、数据清洗：[清洗推特数据](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/06.data_cleaning_Tweets.slides.html#/)
 - 七、数据清洗：[清洗占中新闻、清洗天涯论坛帖子](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/07.data_cleaning_occupy_central_news.slides.html#/)
 - 八、统计初步: [分析天涯论坛的帖子](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/08.analyzing_tianya_thread_network.slides.html#/)
-- 九、机器学习: [分析天涯论坛的帖子](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/09.machine_learning_with_sklearn.slides.html#/)
+- 九、机器学习: [使用sklearn建立机器学习模型](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/09.01-machine-learning-with-sklearn.html#/)
 - 十、[文本挖掘简介](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/10.text_minning_gov_report.slides.html#/)
 - 十一、文本挖掘：[基于机器学习的情感分析](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/11.sentiment_classifier.slides.html#/)
 - 十二、文本挖掘：[主题模型](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/12.topic_models.slides.html#/) [[graphlab](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/12.topic-models-with-graphlab.slides.html#/)]

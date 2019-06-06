@@ -11996,11 +11996,9 @@ a.anchor-link {
 <span class="n">chunkSize</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
 <span class="n">chunk</span> <span class="o">=</span> <span class="n">bigfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">(</span><span class="n">chunkSize</span><span class="p">)</span>
 <span class="k">while</span> <span class="n">chunk</span><span class="p">:</span>
-    <span class="c1">#do sth.</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">((</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">),</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-    
+    <span class="c1">#do sth.</span>
     <span class="n">chunk</span> <span class="o">=</span> <span class="n">bigfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">(</span><span class="n">chunkSize</span><span class="p">)</span> <span class="c1"># read another chunk</span>
-    
 </pre></div>
 
 </div>
@@ -12023,6 +12021,46 @@ a.anchor-link {
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#29992;Pandas&#30340;get_chunk&#21151;&#33021;&#26469;&#22788;&#29702;&#20159;&#32423;&#25968;&#25454;">&#29992;Pandas&#30340;get_chunk&#21151;&#33021;&#26469;&#22788;&#29702;&#20159;&#32423;&#25968;&#25454;<a class="anchor-link" href="#&#29992;Pandas&#30340;get_chunk&#21151;&#33021;&#26469;&#22788;&#29702;&#20159;&#32423;&#25968;&#25454;">&#182;</a></h2><blockquote><p>只有在超过5TB数据量的规模下，Hadoop才是一个合理的技术选择。</p>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../bigdata/OWS/ows-raw.txt&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">f</span><span class="p">,</span>  <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>  <span class="n">iterator</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#跳过报错行</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">chunkSize</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">loop</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">get_chunk</span><span class="p">(</span><span class="n">chunkSize</span><span class="p">)</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">data_cleaning_funtion</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="c1"># do sth.</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> 
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration is stopped.&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13324,24 +13362,39 @@ Name: From User, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;">&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;<a class="anchor-link" href="#&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;">&#182;</a></h1><h2 id="&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;">&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;<a class="anchor-link" href="#&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;">&#182;</a></h2>
+<h1 id="&#23433;&#35013;twitter_text">&#23433;&#35013;twitter_text<a class="anchor-link" href="#&#23433;&#35013;twitter_text">&#182;</a></h1><p><a href="https://github.com/dryan/twitter-text-py/issues/21">twitter-text-py</a> could not be used for python 3</p>
+<blockquote><h3 id="pip-install-twitter-text"><del>pip install twitter-text</del><a class="anchor-link" href="#pip-install-twitter-text">&#182;</a></h3>
+</blockquote>
+<p>Glyph debug the problem, and make <a href="https://github.com/glyph/twitter-text-py">a new repo of twitter-text-py3</a>.</p>
+<blockquote><h2 id="pip-install-twitter-text">pip install twitter-text<a class="anchor-link" href="#pip-install-twitter-text">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;">&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;<a class="anchor-link" href="#&#26080;&#27861;&#27491;&#24120;&#23433;&#35013;&#30340;&#21516;&#23398;">&#182;</a></h1><h2 id="&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;">&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;<a class="anchor-link" href="#&#21487;&#20197;&#22312;spyder&#20013;&#25171;&#24320;terminal&#23433;&#35013;">&#182;</a></h2><p>pip install twitter-text</p>
+
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
-<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;RT @AnonKitsu: ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
+<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;RT @AnonKitsu: @who ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
 <span class="s1">            #OCCUPYWALLSTREET #OWS #OCCUPYNY PLEASE @chengjun @mili http://computational-communication.com </span>
 <span class="s1">            http://ccc.nju.edu.cn RT !!HELP!!!!&#39;&#39;&#39;</span>
 
 <span class="n">rt_patterns</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(RT|via)((?:\b\W*@\w+)+)&quot;</span><span class="p">,</span> \
                          <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
-<span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_patterns</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">tweet</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; @&#39;</span><span class="p">)</span>
+<span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_patterns</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">tweet</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; @&#39;</span><span class="p">)</span><span class="c1">#.split(&#39;:&#39;)[0]</span>
 <span class="n">rt_user_name</span>
 </pre></div>
 
@@ -13355,7 +13408,49 @@ Name: From User, dtype: object</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;AnonKitsu: @who&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;RT @AnonKitsu: @who ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
+<span class="s1">            #OCCUPYWALLSTREET #OWS #OCCUPYNY PLEASE @chengjun @mili http://computational-communication.com </span>
+<span class="s1">            http://ccc.nju.edu.cn RT !!HELP!!!!&#39;&#39;&#39;</span>
+
+<span class="n">rt_patterns</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(RT|via)((?:\b\W*@\w+)+)&quot;</span><span class="p">,</span> \
+                         <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_patterns</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">tweet</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; @&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_user_name</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -13372,12 +13467,12 @@ Name: From User, dtype: object</pre>
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
-<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;@chengjun: ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
+<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;@chengjun:@who ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
 <span class="s1">            #OCCUPYWALLSTREET #OWS #OCCUPYNY PLEASE @chengjun @mili http://computational-communication.com </span>
 <span class="s1">            http://ccc.nju.edu.cn RT !!HELP!!!!&#39;&#39;&#39;</span>
 
@@ -13417,7 +13512,7 @@ None
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
@@ -13426,7 +13521,7 @@ None
     <span class="n">rt_patterns</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(RT|via)((?:\b\W*@\w+)+)&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
     <span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_patterns</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">rt_user_name</span><span class="p">:</span>
-        <span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_user_name</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; @&#39;</span><span class="p">)</span>
+        <span class="n">rt_user_name</span> <span class="o">=</span> <span class="n">rt_user_name</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; @&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rt_user_name</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">rt_user_name</span>
@@ -13439,7 +13534,7 @@ None
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;RT @chengjun: ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
@@ -13459,7 +13554,7 @@ None
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -13476,7 +13571,7 @@ None
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;@chengjun: ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
@@ -13516,6 +13611,9 @@ None
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
 
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/ows_tweets_sample.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    
 <span class="n">rt_network</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">chunk</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
 <span class="n">tweet_user_data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
@@ -13554,14 +13652,15 @@ None
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
 
 <span class="n">rt_network</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">rt_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tweet</span><span class="p">,</span><span class="n">user</span> <span class="ow">in</span> <span class="n">tweet_user_data</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span>  <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tweet_user_data</span><span class="p">):</span>
+    <span class="n">tweet</span><span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">i</span>
     <span class="n">rt_user</span> <span class="o">=</span> <span class="n">extract_rt_user</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">rt_user</span><span class="p">:</span>
         <span class="n">rt_network</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">user</span><span class="p">,</span> <span class="n">rt_user</span><span class="p">))</span> <span class="c1">#(rt_user,&#39;  &#39;, user, end = &#39;\n&#39;)</span>
@@ -13580,15 +13679,15 @@ None
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[((&#39;sophantastic93&#39;, &#39;TheOther99: @TheOther99&#39;), 1),
- ((&#39;HethreC&#39;, &#39;DanielDenvir&#39;), 1),
- ((&#39;liamrulz&#39;, &#39;holidaygoheavy&#39;), 1)]</pre>
+<pre>[((&#39;manbear&#39;, &#39;j3&#39;), 1),
+ ((&#39;The_Proletarian&#39;, &#39;bveeus&#39;), 1),
+ ((&#39;WarOnErrorDKos&#39;, &#39;CalFireNews&#39;), 1)]</pre>
 </div>
 
 </div>
@@ -13602,20 +13701,6 @@ None
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="&#33719;&#24471;&#28165;&#27927;&#36807;&#30340;&#25512;&#29305;&#25991;&#26412;">&#33719;&#24471;&#28165;&#27927;&#36807;&#30340;&#25512;&#29305;&#25991;&#26412;<a class="anchor-link" href="#&#33719;&#24471;&#28165;&#27927;&#36807;&#30340;&#25512;&#29305;&#25991;&#26412;">&#182;</a></h1><p>不含人名、url、各种符号（如RT @等）</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="&#23433;&#35013;twitter_text">&#23433;&#35013;twitter_text<a class="anchor-link" href="#&#23433;&#35013;twitter_text">&#182;</a></h1><p><a href="https://github.com/dryan/twitter-text-py/issues/21">twitter-text-py</a> could not be used for python 3</p>
-<blockquote><h3 id="pip-install-twitter-text"><del>pip install twitter-text</del><a class="anchor-link" href="#pip-install-twitter-text">&#182;</a></h3>
-</blockquote>
-<p>Glyph debug the problem, and make <a href="https://github.com/glyph/twitter-text-py">a new repo of twitter-text-py3</a>.</p>
-<blockquote><h2 id="pip-install-twitter-text">pip install twitter-text<a class="anchor-link" href="#pip-install-twitter-text">&#182;</a></h2>
-</blockquote>
 
 </div>
 </div>

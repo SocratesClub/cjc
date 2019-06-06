@@ -12003,8 +12003,10 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="&#28155;&#21152;Anaconda&#30340;&#22269;&#20869;&#38236;&#20687;&#65292;&#24555;&#36895;&#23433;&#35013;Python&#21253;">&#28155;&#21152;Anaconda&#30340;&#22269;&#20869;&#38236;&#20687;&#65292;&#24555;&#36895;&#23433;&#35013;Python&#21253;<a class="anchor-link" href="#&#28155;&#21152;Anaconda&#30340;&#22269;&#20869;&#38236;&#20687;&#65292;&#24555;&#36895;&#23433;&#35013;Python&#21253;">&#182;</a></h1><p><strong>添加清华镜像</strong></p>
 <p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></p>
-<blockquote><p>conda config --add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a></p>
-</blockquote>
+<div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">pkgs</span><span class="o">/</span><span class="n">free</span><span class="o">/</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">pkgs</span><span class="o">/</span><span class="n">main</span><span class="o">/</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">show_channel_urls</span> <span class="n">yes</span>
+</pre></div>
 <h4 id="&#35774;&#32622;&#25628;&#32034;&#26102;&#26174;&#31034;&#36890;&#36947;&#22320;&#22336;">&#35774;&#32622;&#25628;&#32034;&#26102;&#26174;&#31034;&#36890;&#36947;&#22320;&#22336;<a class="anchor-link" href="#&#35774;&#32622;&#25628;&#32034;&#26102;&#26174;&#31034;&#36890;&#36947;&#22320;&#22336;">&#182;</a></h4><blockquote><p>conda config --set show_channel_urls yes</p>
 </blockquote>
 <p>如果命令行方法添加不上，可以在用户目录下的<code>.condarc</code>中添加<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/：">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/：</a> 
@@ -12190,141 +12192,6 @@ You can use pip to upgrade the graphlab-create package. For more information see
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="&#23433;&#35013;twitter_text">&#23433;&#35013;twitter_text<a class="anchor-link" href="#&#23433;&#35013;twitter_text">&#182;</a></h1><blockquote><h2><del>pip install twitter-text-py&lt;/de&gt;</h2>
-</blockquote>
-<p><a href="https://github.com/dryan/twitter-text-py/issues/21">twitter-text-py</a> could not be used for python 3, I debug the problem, and make <a href="https://github.com/computational-class/twitter-text-py3">a new repo of twitter-text-py3</a>.</p>
-<blockquote><h2 id="pip-install-git+https://github.com/computational-class/twitter-text-py3.git">pip install git+<a href="https://github.com/computational-class/twitter-text-py3.git">https://github.com/computational-class/twitter-text-py3.git</a><a class="anchor-link" href="#pip-install-git+https://github.com/computational-class/twitter-text-py3.git">&#182;</a></h2>
-</blockquote>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">twitter_text</span>
-
-<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;RT @AnonKitsu: ALERT!!!!!!!!!!COPS ARE KETTLING PROTESTERS IN PARK W HELICOPTERS AND PADDYWAGONS!!!! </span>
-<span class="s1">            #OCCUPYWALLSTREET #OWS #OCCUPYNY PLEASE @chengjun @mili http://computational-communication.com </span>
-<span class="s1">            http://ccc.nju.edu.cn RT !!HELP!!!!&#39;&#39;&#39;</span>
-
-<span class="n">ex</span> <span class="o">=</span> <span class="n">twitter_text</span><span class="o">.</span><span class="n">Extractor</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
-<span class="n">at_names</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">extract_mentioned_screen_names</span><span class="p">()</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">extract_urls</span><span class="p">()</span>
-<span class="n">hashtags</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">extract_hashtags</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">at_names</span><span class="p">,</span> <span class="n">urls</span><span class="p">,</span> <span class="n">hashtags</span><span class="p">,</span><span class="s1">&#39;--------&gt;&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;AnonKitsu&#39;, &#39;chengjun&#39;, &#39;mili&#39;] [&#39;http://computational-communication.com&#39;, &#39;http://ccc.nju.edu.cn&#39;] [&#39;OCCUPYWALLSTREET&#39;, &#39;OWS&#39;, &#39;OCCUPYNY&#39;] --------&gt;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">twitter_text</span>
-<span class="n">help</span><span class="p">(</span><span class="n">twitter_text</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Help on package twitter_text:
-
-NAME
-    twitter_text - # encoding=utf-8
-
-PACKAGE CONTENTS
-    autolink
-    extractor
-    highlighter
-    regex
-    templatetags (package)
-    unicode
-    validation
-
-CLASSES
-    builtins.object
-        TwitterText
-    
-    class TwitterText(builtins.object)
-     |  Methods defined here:
-     |  
-     |  __init__(self, text)
-     |      Initialize self.  See help(type(self)) for accurate signature.
-     |  
-     |  __repr__(self)
-     |      Return repr(self).
-     |  
-     |  __unicode__(self)
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data descriptors defined here:
-     |  
-     |  __dict__
-     |      dictionary for instance variables (if defined)
-     |  
-     |  __weakref__
-     |      list of weak references to the object (if defined)
-     |  
-     |  autolink
-     |  
-     |  extractor
-     |  
-     |  highlighter
-     |  
-     |  validation
-
-FILE
-    /Users/datalab/Applications/anaconda/lib/python3.5/site-packages/twitter_text/__init__.py
-
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>

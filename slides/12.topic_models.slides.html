@@ -12187,7 +12187,7 @@ a.anchor-link {
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -14032,7 +14032,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
@@ -14052,29 +14052,10 @@ if(typeof(LDAvis) !== "undefined"){
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/datalab/Applications/anaconda/lib/python3.5/site-packages/bs4/builder/_lxml.py:250: DeprecationWarning: inspect.getargspec() is deprecated, use inspect.signature() instead
-  self.parser.feed(markup)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gov_report_2016</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)]</span>
@@ -14116,7 +14097,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_txt</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
@@ -14132,7 +14113,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gov_report_2016</span> <span class="o">=</span> <span class="p">[</span><span class="n">clean_txt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gov_report_2016</span><span class="p">]</span>
@@ -14145,7 +14126,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">gov_report_2016</span><span class="p">)</span>
@@ -14161,7 +14142,7 @@ if(typeof(LDAvis) !== "undefined"){
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[118]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -14178,7 +14159,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gov_report_2016</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
@@ -14219,7 +14200,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">gov_report_2016</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -14235,7 +14216,7 @@ if(typeof(LDAvis) !== "undefined"){
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[120]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -14252,10 +14233,10 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[127]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./data/stopwords.txt&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;../data/stopwords.txt&#39;</span>
 <span class="n">stopwords</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
@@ -14306,7 +14287,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[132]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">adding_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s1">&#39;我们&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;要&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;地&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;有&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;这&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;人&#39;</span><span class="p">,</span>
@@ -14322,7 +14303,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[133]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">jieba.analyse</span>
@@ -14343,7 +14324,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getCorpus</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -14374,7 +14355,7 @@ if(typeof(LDAvis) !== "undefined"){
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">inferTopicNumber</span><span class="p">(</span><span class="n">bag_of_words_corpus</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">word_count_dict</span><span class="p">):</span>
@@ -14452,7 +14433,7 @@ Prefix dict has been built succesfully.
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[137]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gensim</span>
@@ -14478,8 +14459,22 @@ Prefix dict has been built succesfully.
 <div class="prompt"></div>
 
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Building prefix dict from the default dictionary ...
+Dumping model to file cache /var/folders/8b/hhnbt0nd4zsg2qhxc28q23w80000gn/T/jieba.cache
+Loading model cost 1.347 seconds.
+Prefix dict has been built succesfully.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>In the corpus there are 2633 unique tokens
+<pre>In the corpus there are 2632 unique tokens
 </pre>
 </div>
 </div>
@@ -14490,13 +14485,16 @@ Prefix dict has been built succesfully.
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[138]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TfidfModel</span><span class="p">(</span><span class="n">bag_of_words_corpus</span> <span class="p">)</span>
 <span class="n">corpus_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">[</span><span class="n">bag_of_words_corpus</span> <span class="p">]</span>
 <span class="c1">#lda_model = gensim.models.LdaModel(corpus_tfidf, num_topics=20, id2word=word_count_dict, passes=10)</span>
-<span class="n">lda_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LdaMulticore</span><span class="p">(</span><span class="n">corpus_tfidf</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">word_count_dict</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LdaMulticore</span><span class="p">(</span><span class="n">corpus_tfidf</span><span class="p">,</span> 
+                                       <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+                                       <span class="n">id2word</span><span class="o">=</span><span class="n">word_count_dict</span><span class="p">,</span> 
+                                       <span class="n">passes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -14509,7 +14507,7 @@ Prefix dict has been built succesfully.
 <div class="prompt input_prompt">In&nbsp;[141]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">perplexity_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">inferTopicNumber</span><span class="p">(</span><span class="n">bag_of_words_corpus</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">word_count_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span> <span class="p">]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">perplexity_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">inferTopicNumber</span><span class="p">(</span><span class="n">bag_of_words_corpus</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">word_count_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span> <span class="p">]]</span>  
 </pre></div>
 
 </div>
@@ -14555,7 +14553,7 @@ Prefix dict has been built succesfully.
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -14571,18 +14569,18 @@ Prefix dict has been built succesfully.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[143]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[(9,
-  &#39;0.003*&#34;消费&#34; + 0.003*&#34;审批&#34; + 0.002*&#34;旅游&#34; + 0.002*&#34;事项&#34; + 0.002*&#34;取消&#34; + 0.002*&#34;设施&#34; + 0.002*&#34;优化&#34; + 0.001*&#34;彻底&#34; + 0.001*&#34;方便&#34; + 0.001*&#34;强刺激&#34;&#39;),
- (8,
-  &#39;0.005*&#34;回顾&#34; + 0.004*&#34;2015&#34; + 0.003*&#34;竞争&#34; + 0.002*&#34;对外开放&#34; + 0.002*&#34;充分&#34; + 0.002*&#34;教育&#34; + 0.002*&#34;投资&#34; + 0.002*&#34;成绩&#34; + 0.002*&#34;百分点&#34; + 0.002*&#34;合作&#34;&#39;),
- (10,
-  &#39;0.020*&#34;各位&#34; + 0.020*&#34;代表&#34; + 0.007*&#34;创新&#34; + 0.005*&#34;企业&#34; + 0.005*&#34;经济&#34; + 0.005*&#34;实施&#34; + 0.005*&#34;加快&#34; + 0.005*&#34;促进&#34; + 0.004*&#34;政策&#34; + 0.004*&#34;社会&#34;&#39;)]</pre>
+<pre>[(8,
+  &#39;0.007*&#34;改革&#34; + 0.006*&#34;创新&#34; + 0.005*&#34;企业&#34; + 0.005*&#34;实施&#34; + 0.005*&#34;就业&#34; + 0.005*&#34;政策&#34; + 0.005*&#34;加快&#34; + 0.005*&#34;促进&#34; + 0.005*&#34;扩大&#34; + 0.005*&#34;农业&#34;&#39;),
+ (1,
+  &#39;0.005*&#34;八个&#34; + 0.004*&#34;财政赤字&#34; + 0.003*&#34;今年&#34; + 0.003*&#34;范围&#34; + 0.003*&#34;做好&#34; + 0.003*&#34;重点&#34; + 0.003*&#34;方面&#34; + 0.002*&#34;财政支出&#34; + 0.002*&#34;安排&#34; + 0.002*&#34;干事&#34;&#39;),
+ (6,
+  &#39;0.006*&#34;以下&#34; + 0.005*&#34;回顾&#34; + 0.005*&#34;2015&#34; + 0.004*&#34;主要&#34; + 0.004*&#34;农村&#34; + 0.004*&#34;脱贫&#34; + 0.004*&#34;一年&#34; + 0.003*&#34;扶贫&#34; + 0.002*&#34;万公里&#34; + 0.002*&#34;支撑&#34;&#39;)]</pre>
 </div>
 
 </div>
@@ -14593,7 +14591,7 @@ Prefix dict has been built succesfully.
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[144]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">topictermlist</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -14616,26 +14614,26 @@ Prefix dict has been built succesfully.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&#34;脱贫&#34; &#34;扶贫&#34; &#34;农民&#34; &#34;及其&#34; &#34;各级&#34; &#34;法治&#34; &#34;退耕还林&#34; &#34;集体&#34; &#34;玉米&#34; &#34;农户&#34;
-&#34;以下&#34; &#34;民族&#34; &#34;宗教&#34; &#34;一年&#34; &#34;主要&#34; &#34;生态&#34; &#34;合作&#34; &#34;保护&#34; &#34;存在&#34; &#34;一些&#34;
-&#34;2016&#34; &#34;重点&#34; &#34;时期&#34; &#34;十三&#34; &#34;减少&#34; &#34;举措&#34; &#34;成就&#34; &#34;任务&#34; &#34;主要&#34; &#34;地方&#34;
-&#34;领导人&#34; &#34;农村&#34; &#34;论坛&#34; &#34;峰会&#34; &#34;联合国&#34; &#34;会议&#34; &#34;外交&#34; &#34;系列&#34; &#34;巩固&#34; &#34;可靠&#34;
-&#34;供给&#34; &#34;结构性&#34; &#34;体制&#34; &#34;改革&#34; &#34;行政&#34; &#34;监管&#34; &#34;方式&#34; &#34;围绕&#34; &#34;贸易&#34; &#34;活力&#34;
-&#34;世界反法西斯战争&#34; &#34;和平&#34; &#34;强国&#34; &#34;大国&#34; &#34;利益&#34; &#34;创新型&#34; &#34;人民&#34; &#34;外交&#34; &#34;合作&#34; &#34;中国&#34;
-&#34;预期&#34; &#34;海洋&#34; &#34;考虑&#34; &#34;就业&#34; &#34;7%&#34; &#34;地区&#34; &#34;6.5%&#34; &#34;外商投资&#34; &#34;经济运行&#34; &#34;成为&#34;
-&#34;需求&#34; &#34;政府&#34; &#34;增收&#34; &#34;非公有制&#34; &#34;农民&#34; &#34;合作&#34; &#34;融资&#34; &#34;地方&#34; &#34;三农&#34; &#34;13%&#34;
-&#34;回顾&#34; &#34;2015&#34; &#34;竞争&#34; &#34;对外开放&#34; &#34;充分&#34; &#34;教育&#34; &#34;投资&#34; &#34;成绩&#34; &#34;百分点&#34; &#34;合作&#34;
-&#34;消费&#34; &#34;审批&#34; &#34;旅游&#34; &#34;事项&#34; &#34;取消&#34; &#34;设施&#34; &#34;优化&#34; &#34;彻底&#34; &#34;方便&#34; &#34;强刺激&#34;
-&#34;各位&#34; &#34;代表&#34; &#34;创新&#34; &#34;企业&#34; &#34;经济&#34; &#34;实施&#34; &#34;加快&#34; &#34;促进&#34; &#34;政策&#34; &#34;社会&#34;
-&#34;自贸区&#34; &#34;协定&#34; &#34;谈判&#34; &#34;安全&#34; &#34;健全&#34; &#34;干事&#34; &#34;意识&#34; &#34;治理&#34; &#34;双赢&#34; &#34;强力&#34;
-&#34;城镇化&#34; &#34;挑战&#34; &#34;积累&#34; &#34;新型&#34; &#34;基础设施&#34; &#34;四省&#34; &#34;藏区&#34; &#34;产业布局&#34; &#34;新疆&#34; &#34;四大&#34;
-&#34;两岸&#34; &#34;财政赤字&#34; &#34;表示&#34; &#34;感谢&#34; &#34;诚挚&#34; &#34;动能&#34; &#34;过程&#34; &#34;安排&#34; &#34;亿多&#34; &#34;亿元&#34;
-&#34;接受&#34; &#34;农业&#34; &#34;政府&#34; &#34;调控&#34; &#34;风险&#34; &#34;高效&#34; &#34;存量&#34; &#34;自觉&#34; &#34;结构性&#34; &#34;十八&#34;
-&#34;军队&#34; &#34;民生&#34; &#34;节能&#34; &#34;环保&#34; &#34;调控&#34; &#34;改革&#34; &#34;医保&#34; &#34;金融&#34; &#34;国防&#34; &#34;医疗&#34;
-&#34;国有企业&#34; &#34;国有资产&#34; &#34;侨务&#34; &#34;侨眷&#34; &#34;归侨&#34; &#34;海内外&#34; &#34;向心力&#34; &#34;中华儿女&#34; &#34;认真落实&#34; &#34;海外侨胞&#34;
-&#34;民营企业&#34; &#34;消除&#34; &#34;各展&#34; &#34;合法权益&#34; &#34;土地&#34; &#34;壁垒&#34; &#34;天然气&#34; &#34;市政&#34; &#34;核准&#34; &#34;共同&#34;
-&#34;就业&#34; &#34;住房&#34; &#34;农村&#34; &#34;人口&#34; &#34;范围&#34; &#34;城镇&#34; &#34;居民&#34; &#34;城镇化&#34; &#34;创业&#34; &#34;民生&#34;
-&#34;八个&#34; &#34;做好&#34; &#34;今年&#34; &#34;方面&#34; &#34;更加&#34; &#34;重点&#34; &#34;党风廉政&#34; &#34;生产总值&#34; &#34;基本&#34; &#34;今后&#34;
+<pre>&#34;需求&#34; &#34;领导人&#34; &#34;论坛&#34; &#34;自贸&#34; &#34;峰会&#34; &#34;住房&#34; &#34;亿美元&#34; &#34;合作&#34; &#34;国际&#34; &#34;一手&#34;
+&#34;八个&#34; &#34;财政赤字&#34; &#34;今年&#34; &#34;范围&#34; &#34;做好&#34; &#34;重点&#34; &#34;方面&#34; &#34;财政支出&#34; &#34;安排&#34; &#34;干事&#34;
+&#34;非公有制&#34; &#34;动能&#34; &#34;强国&#34; &#34;各种&#34; &#34;城镇化&#34; &#34;经济&#34; &#34;中心&#34; &#34;创新型&#34; &#34;动力&#34; &#34;战略&#34;
+&#34;经济运行&#34; &#34;向心力&#34; &#34;中华儿女&#34; &#34;侨眷&#34; &#34;侨务&#34; &#34;海内外&#34; &#34;归侨&#34; &#34;不断&#34; &#34;事故&#34; &#34;维护&#34;
+&#34;宗教&#34; &#34;合作&#34; &#34;竞争&#34; &#34;动能&#34; &#34;产能&#34; &#34;对外开放&#34; &#34;深刻&#34; &#34;审批&#34; &#34;经济&#34; &#34;关系&#34;
+&#34;随机&#34; &#34;行政&#34; &#34;清单&#34; &#34;事项&#34; &#34;公布&#34; &#34;监管&#34; &#34;审批&#34; &#34;收费&#34; &#34;价格&#34; &#34;政府&#34;
+&#34;以下&#34; &#34;回顾&#34; &#34;2015&#34; &#34;主要&#34; &#34;农村&#34; &#34;脱贫&#34; &#34;一年&#34; &#34;扶贫&#34; &#34;万公里&#34; &#34;支撑&#34;
+&#34;各位&#34; &#34;代表&#34; &#34;建成&#34; &#34;基本&#34; &#34;党风廉政&#34; &#34;万元&#34; &#34;现代&#34; &#34;贸易&#34; &#34;阶段&#34; &#34;实现&#34;
+&#34;改革&#34; &#34;创新&#34; &#34;企业&#34; &#34;实施&#34; &#34;就业&#34; &#34;政策&#34; &#34;加快&#34; &#34;促进&#34; &#34;扩大&#34; &#34;农业&#34;
+&#34;两岸&#34; &#34;环保&#34; &#34;节能&#34; &#34;我国&#34; &#34;取得&#34; &#34;亿多&#34; &#34;经济&#34; &#34;国内&#34; &#34;调控&#34; &#34;生产总值&#34;
+&#34;地方&#34; &#34;接受&#34; &#34;项目&#34; &#34;合作&#34; &#34;政府&#34; &#34;支付&#34; &#34;存款&#34; &#34;产能&#34; &#34;充分发挥&#34; &#34;人民币&#34;
+&#34;增收&#34; &#34;农民&#34; &#34;渠道&#34; &#34;毫不放松&#34; &#34;富农&#34; &#34;农惠农&#34; &#34;无穷&#34; &#34;征程&#34; &#34;优越性&#34; &#34;显示&#34;
+&#34;合作&#34; &#34;经济&#34; &#34;增长&#34; &#34;经贸合作&#34; &#34;居民&#34; &#34;强力&#34; &#34;下决心&#34; &#34;环境治理&#34; &#34;双赢&#34; &#34;事关&#34;
+&#34;民生&#34; &#34;感谢&#34; &#34;表示&#34; &#34;诚挚&#34; &#34;一些&#34; &#34;存在&#34; &#34;同胞&#34; &#34;为政之道&#34; &#34;之忧&#34; &#34;一件&#34;
+&#34;十三&#34; &#34;消费&#34; &#34;融资&#34; &#34;港澳&#34; &#34;时期&#34; &#34;地方&#34; &#34;目标&#34; &#34;金融&#34; &#34;货币政策&#34; &#34;海洋&#34;
+&#34;民族&#34; &#34;人民&#34; &#34;世界反法西斯战争&#34; &#34;充满&#34; &#34;救助&#34; &#34;更加&#34; &#34;特色&#34; &#34;美好&#34; &#34;前景&#34; &#34;将会&#34;
+&#34;军队&#34; &#34;协定&#34; &#34;谈判&#34; &#34;自贸区&#34; &#34;国防&#34; &#34;战略&#34; &#34;强军&#34; &#34;商签&#34; &#34;各方&#34; &#34;亚太&#34;
+&#34;消除&#34; &#34;电信&#34; &#34;合法权益&#34; &#34;土地&#34; &#34;壁垒&#34; &#34;天然气&#34; &#34;市政&#34; &#34;核准&#34; &#34;民营企业&#34; &#34;其长&#34;
+&#34;2016&#34; &#34;重点&#34; &#34;国民经济&#34; &#34;第十三个&#34; &#34;政府&#34; &#34;规划&#34; &#34;五年&#34; &#34;城乡&#34; &#34;城镇化&#34; &#34;全民&#34;
+&#34;国有企业&#34; &#34;出口&#34; &#34;国有资产&#34; &#34;贸易&#34; &#34;进口&#34; &#34;外贸&#34; &#34;职能&#34; &#34;优化&#34; &#34;退税&#34; &#34;整合&#34;
 </pre>
 </div>
 </div>
