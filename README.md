@@ -51,16 +51,10 @@
 https://github.com/computational-class/cjc/wiki/
 
 # Tutorials
-http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ 或者 http://github.com/computational-class/cjc/tree/gh-pages/code/
-
-推荐http://nbviewer.jupyter.org/ 更流畅浏览
-
-例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
+1. 下载后，打开code文件夹浏览
+2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的Jupyter Notebook, 例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
 
 # PPT
-http://nbviewer.jupyter.org/github/computational-class/cjc/tree/gh-pages/slides/ 或者
-http://github.com/computational-class/cjc/tree/gh-pages/slides/  
-
-推荐http://nbviewer.jupyter.org/ 更流畅浏览
-
-例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/04.PythonCrawlerGovernmentReport.slides.html#/)
+1. 下载后，打开slides文件夹浏览
+2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的slides，点击上方的**view as slides**🎁图标
+3. 通过nbviewer浏览，打开 http://nbviewer.jupyter.org/github/computational-class/cjc/tree/gh-pages/slides/ ，选取需要浏览的slides，例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/04.PythonCrawlerGovernmentReport.slides.html#/)
