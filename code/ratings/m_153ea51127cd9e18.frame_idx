@@ -1,0 +1,15 @@
+[sframe]
+version=0
+num_segments=0
+num_columns=4
+nrows=1000209
+[column_names]
+0000=X.0
+0001=X.1
+0002=X.2
+0003=X.3
+[column_files]
+0000=m_153ea51127cd9e18.sidx:0
+0001=m_153ea51127cd9e18.sidx:1
+0002=m_153ea51127cd9e18.sidx:2
+0003=m_153ea51127cd9e18.sidx:3
