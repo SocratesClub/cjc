@@ -50,6 +50,16 @@
 
 https://github.com/computational-class/cjc/wiki/
 
+# 参考书目
+
+- Python Data Science Handbook	Jake VanderPlas O’REILLY	2016.11
+- Mining massive datasets	Jure Leskovec等	Cambridge University Press 2014.12.29
+- A Whirlwind Tour Of Python	Jake VanderPlas O’REILLY	2016.8.15
+- Data Science from Scratch	Joel Grus	O’REILLY	2015.4.28
+- Bit by Bit: Social Research in the Digital Age	Matthew J. Salganik	Princeton University Press	2017.12.5
+- 计算传播学导论	张伦、王成军、许小可	北京师范大学出版社	2018.9
+
+
 # Tutorials
 1. 下载后，打开code文件夹浏览
 2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的Jupyter Notebook, 例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
