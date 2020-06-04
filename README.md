@@ -7,8 +7,13 @@
 - 授课人：[王成军](http://chengjun.github.io)
 - 联系方式：wangchengjun@nju.edu.cn
 - 计算传播网：http://computational-communication.com
+<<<<<<< HEAD
 - 在线讲义: https://computational-class.github.io/ccbook/
 
+=======
+
+> 《计算新闻传播学》为复旦大学新闻学院为新媒体硕士方向研究生开设的必修课程之一，旨在为新媒体研究方向和有志于从事新媒体产业工作的学生提供计算社会科学的基础知识。课程致力于：1. 介绍大数据和人工智能驱动下计算传播产业的发展；2.培养学生的数据素养和计算思维；3. 熟练掌握Python编程语言；4.掌握使用Python抓取互联网数据的基本方法；5.具体介绍使用Python分析各种形式的媒体数据的方法，具体涵盖统计分析、机器学习、文本挖掘、媒体推荐系统、网络科学；6.介绍计算新闻和计算传播研究中的经典文献。 
+>>>>>>> a97206ec3f495f901991ff5418a9520f4c3bf708
 
 # 时间安排
 
@@ -49,6 +54,7 @@
 
 https://github.com/computational-class/cjc/wiki/
 
+<<<<<<< HEAD
 # Jupyter Notebooks & Tutorials
 1. 下载后，打开code文件夹浏览
 2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的Jupyter Notebook, 例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
@@ -56,3 +62,23 @@ https://github.com/computational-class/cjc/wiki/
 # Slides
 1. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的slides，点击上方的**view as slides**🎁图标
 2. 下载后，打开slides文件夹浏览
+=======
+# 参考书目
+
+- Python Data Science Handbook	Jake VanderPlas O’REILLY	2016.11
+- Mining massive datasets	Jure Leskovec等	Cambridge University Press 2014.12.29
+- A Whirlwind Tour Of Python	Jake VanderPlas O’REILLY	2016.8.15
+- Data Science from Scratch	Joel Grus	O’REILLY	2015.4.28
+- Bit by Bit: Social Research in the Digital Age	Matthew J. Salganik	Princeton University Press	2017.12.5
+- 计算传播学导论	张伦、王成军、许小可	北京师范大学出版社	2018.9
+
+
+# Tutorials
+1. 下载后，打开code文件夹浏览
+2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的Jupyter Notebook, 例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/04.PythonCrawlerGovernmentReport.ipynb)
+
+# PPT
+1. 下载后，打开slides文件夹浏览
+2. 【推荐】通过nbviewer浏览，打开http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/code/ ，选取需要浏览的slides，点击上方的**view as slides**🎁图标
+3. 通过nbviewer浏览，打开 http://nbviewer.jupyter.org/github/computational-class/cjc/tree/gh-pages/slides/ ，选取需要浏览的slides，例如：[数据抓取：抓取47年政府工作报告](http://nbviewer.jupyter.org/github/computational-class/cjc/blob/gh-pages/slides/04.PythonCrawlerGovernmentReport.slides.html#/)
+>>>>>>> a97206ec3f495f901991ff5418a9520f4c3bf708
