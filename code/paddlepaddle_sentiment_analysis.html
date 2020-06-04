@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<!-- saved from url=(0214)http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95 -->
+<html lang="zh-CN"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width">
+<title>百度深度学习中文情感分析工具Senta试用及在线测试 | 我爱自然语言处理</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.52nlp.cn/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://www.52nlp.cn/wp-content/themes/twentytwelve/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="我爱自然语言处理 » Feed" href="http://www.52nlp.cn/feed">
+<link rel="alternate" type="application/rss+xml" title="我爱自然语言处理 » 评论Feed" href="http://www.52nlp.cn/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="我爱自然语言处理 » 百度深度学习中文情感分析工具Senta试用及在线测试评论Feed" href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95/feed">
+		<script type="text/javascript" async="" defer="" src="./paddlepaddle_sentiment_analysis_files/matomo.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.52nlp.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./paddlepaddle_sentiment_analysis_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="yarppWidgetCss-css" href="./paddlepaddle_sentiment_analysis_files/widget.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-syntax-css-css" href="./paddlepaddle_sentiment_analysis_files/wp-syntax.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentytwelve-style-css" href="./paddlepaddle_sentiment_analysis_files/style.css" type="text/css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentytwelve-ie-css'  href='http://www.52nlp.cn/wp-content/themes/twentytwelve/css/ie.css?ver=20121010' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/jquery.js"></script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="http://www.52nlp.cn/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.52nlp.cn/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.52nlp.cn/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="AINLP公众号&quot;自动作诗机&quot;上线" href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e8%87%aa%e5%8a%a8%e4%bd%9c%e8%af%97%e6%9c%ba%e4%b8%8a%e7%ba%bf">
+<link rel="next" title="AINLP公众号新增SnowNLP情感分析模块" href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e6%96%b0%e5%a2%9esnownlp%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e6%a8%a1%e5%9d%97">
+<meta name="generator" content="WordPress 4.9.9">
+<link rel="canonical" href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95">
+<link rel="shortlink" href="http://www.52nlp.cn/?p=12017">
+<link rel="alternate" type="application/json+oembed" href="http://www.52nlp.cn/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.52nlp.cn%2F%25e7%2599%25be%25e5%25ba%25a6%25e6%25b7%25b1%25e5%25ba%25a6%25e5%25ad%25a6%25e4%25b9%25a0%25e4%25b8%25ad%25e6%2596%2587%25e6%2583%2585%25e6%2584%259f%25e5%2588%2586%25e6%259e%2590%25e5%25b7%25a5%25e5%2585%25b7senta%25e8%25af%2595%25e7%2594%25a8%25e5%258f%258a%25e5%259c%25a8%25e7%25ba%25bf%25e6%25b5%258b%25e8%25af%2595">
+<link rel="alternate" type="text/xml+oembed" href="http://www.52nlp.cn/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.52nlp.cn%2F%25e7%2599%25be%25e5%25ba%25a6%25e6%25b7%25b1%25e5%25ba%25a6%25e5%25ad%25a6%25e4%25b9%25a0%25e4%25b8%25ad%25e6%2596%2587%25e6%2583%2585%25e6%2584%259f%25e5%2588%2586%25e6%259e%2590%25e5%25b7%25a5%25e5%2585%25b7senta%25e8%25af%2595%25e7%2594%25a8%25e5%258f%258a%25e5%259c%25a8%25e7%25ba%25bf%25e6%25b5%258b%25e8%25af%2595&amp;format=xml">
+<!-- wp thread comment 1.4.9.4.002 -->
+<style type="text/css" media="screen">
+.editComment, .editableComment, .textComment{
+	display: inline;
+}
+.comment-childs{
+	border: 1px solid #999;
+	margin: 5px 2px 2px 4px;
+	padding: 4px 2px 2px 4px;
+	background-color: white;
+}
+.comment-childs > p {
+        word-break: break-word;
+        word-wrap: break-word;
+}
+.chalt{
+	background-color: #E2E2E2;
+}
+#newcomment{
+	border:1px dashed #777;width:90%;
+}
+#newcommentsubmit{
+	color:red;
+}
+.adminreplycomment{
+	border:1px dashed #777;
+	width:99%;
+	margin:4px;
+	padding:4px;
+}
+.mvccls{
+	color: #999;
+}
+			
+</style>
+</head>
+
+<body class="post-template-default single single-post postid-12017 single-format-standard">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<hgroup>
+			<h1 class="site-title"><a href="http://www.52nlp.cn/" title="我爱自然语言处理" rel="home">我爱自然语言处理</a></h1>
+			<h2 class="site-description">I Love Natural Language Processing</h2>
+		</hgroup>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle">菜单</button>
+			<a class="assistive-text" href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95#content" title="跳至内容">跳至内容</a>
+			<div class="nav-menu"><ul>
+<li><a href="http://www.52nlp.cn/">首页</a></li><li class="page_item page-item-11178"><a href="http://www.52nlp.cn/ainlp">AINLP</a></li>
+<li class="page_item page-item-11814"><a href="http://www.52nlp.cn/%e4%ba%a4%e6%b5%81%e7%be%a4">交流群</a></li>
+<li class="page_item page-item-9840"><a href="http://www.52nlp.cn/%e8%af%be%e7%a8%8b">公开课</a></li>
+<li class="page_item page-item-9088"><a href="http://www.52nlp.cn/%e4%b9%a6%e7%b1%8d">书籍</a></li>
+<li class="page_item page-item-9435"><a href="http://coursegraph.com/" target="_blank">课程图谱</a></li>
+<li class="page_item page-item-9432"><a href="http://www.nlpjob.com/" target="_blank">招聘求职</a></li>
+<li class="page_item page-item-2557 page_item_has_children"><a href="http://www.52nlp.cn/resources">资源</a>
+<ul class="children">
+	<li class="page_item page-item-1271"><a href="http://www.52nlp.cn/resources/wpmatheditor">WpMathEditor</a></li>
+</ul>
+</li>
+<li class="page_item page-item-2"><a href="http://www.52nlp.cn/about">关于</a></li>
+<li class="page_item page-item-9013"><a href="http://weibo.com/52nlp" target="_blank">微博</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+
+			</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">
+
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-12017" class="post-12017 post type-post status-publish format-standard hentry category-1658 category-nlp tag-paddle tag-paddlehub tag-paddlenlp tag-paddlepaddle tag-python tag-senta tag-1987 tag-1994 tag-1989 tag-1990 tag-398 tag-1988 tag-text-classification tag-1018 tag-53">
+				<header class="entry-header">
+			
+						<h1 class="entry-title">百度深度学习中文情感分析工具Senta试用及在线测试</h1>
+										<div class="comments-link">
+					<a href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95#respond"><span class="leave-reply">发表回复</span></a>				</div><!-- .comments-link -->
+					</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<div class="code-block code-block-5" style="margin: 8px auto; text-align: center; clear: both;">
+<a href="http://www.52nlp.cn/%E6%AC%A2%E8%BF%8E%E5%85%B3%E6%B3%A8ainlp-%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E6%9C%89ai%E7%9A%84nlp%E5%85%AC%E4%BC%97%E5%8F%B7">AINLP：一个有趣有AI的NLP公众号</a></div>
+<p>情感分析是自然语言处理里面一个热门话题，去年参加<a href="http://www.52nlp.cn/tag/ai-challenger" rel="noopener" target="_blank">AI Challenger</a>时关注了一下细粒度情感分析赛道，当时模仿baseline写了一个fasttext版本：<a href="http://www.52nlp.cn/ai-challenger-2018-%E7%BB%86%E7%B2%92%E5%BA%A6%E7%94%A8%E6%88%B7%E8%AF%84%E8%AE%BA%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90-fasttext-baseline" rel="noopener" target="_blank">AI Challenger 2018 细粒度用户评论情感分析 fastText Baseline</a> ，至今不断有同学在star这个项目：<a href="https://github.com/panyang/fastText-for-AI-Challenger-Sentiment-Analysis" rel="noopener" target="_blank">fastText-for-AI-Challenger-Sentiment-Analysis</a></p>
+<p>周末通过<a href="https://github.com/PaddlePaddle/PaddleHub" rel="noopener" target="_blank">PaddleHub</a>试用了一下百度的深度学习中文情感分析工具<a href="https://github.com/baidu/senta" rel="noopener" target="_blank">Senta</a>，还是很方便，于是，将这个作为中文情感分析的一个技能点加入到了AINLP公众号的对话中，感兴趣的同学可以先测试：</p>
+<p><img src="./paddlepaddle_sentiment_analysis_files/senta.png" alt="" width="291" height="576" class="aligncenter size-full wp-image-12023" srcset="http://www.52nlp.cn/wp-content/uploads/2019/07/senta.png 291w, http://www.52nlp.cn/wp-content/uploads/2019/07/senta-152x300.png 152w" sizes="(max-width: 291px) 100vw, 291px"></p>
+<p>至于安装和使用，还是简单说一下，以下是在Ubuntu16.04, Python3.x virtualenv环境下安装和测试。</p>
+<p>安装直接通过pip install即可：</p>
+<pre>pip install paddlepaddle（这里用的是CPU版本）
+pip install paddlehub
+</pre>
+<p>关于如何使用百度这个中文情感分析工具，最直接的方法还是follow官方demo脚本：</p>
+<p><a href="https://github.com/PaddlePaddle/PaddleHub/blob/release/v1.0.0/demo/senta/senta_demo.py" rel="noopener" target="_blank">PaddleHub/demo/senta/senta_demo.py</a></p>
+<p>在iPython中大致如下调用：</p>
+
+<div class="wp_syntax" style="position: relative; width: auto;"><table><tbody><tr><td class="code"><pre class="python" style="font-family:monospace;">Python 3.5.2 <span style="color: black;">(</span>default<span style="color: #66cc66;">,</span> Nov <span style="color: #ff4500;">12</span> <span style="color: #ff4500;">2018</span><span style="color: #66cc66;">,</span> <span style="color: #ff4500;">13</span>:<span style="color: #ff4500;">43</span>:<span style="color: #ff4500;">14</span><span style="color: black;">)</span> 
+Type <span style="color: #483d8b;">'copyright'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'credits'</span> <span style="color: #ff7700;font-weight:bold;">or</span> <span style="color: #483d8b;">'license'</span> <span style="color: #ff7700;font-weight:bold;">for</span> more information
+IPython 7.5.0 -- An enhanced Interactive Python. <span style="color: black;">Type</span> <span style="color: #483d8b;">'?'</span> <span style="color: #ff7700;font-weight:bold;">for</span> <span style="color: #008000;">help</span>.
+&nbsp;
+<span style="color: black;">In</span> <span style="color: black;">[</span><span style="color: #ff4500;">1</span><span style="color: black;">]</span>: <span style="color: #ff7700;font-weight:bold;">import</span> paddlehub <span style="color: #ff7700;font-weight:bold;">as</span> hub                                                                 
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">2</span><span style="color: black;">]</span>: senta <span style="color: #66cc66;">=</span> hub.<span style="color: black;">Module</span><span style="color: black;">(</span>name<span style="color: #66cc66;">=</span><span style="color: #483d8b;">"senta_bilstm"</span><span style="color: black;">)</span>                                                 
+<span style="color: #ff4500;">2019</span>-<span style="color: #ff4500;">07</span>-<span style="color: #ff4500;">06</span> <span style="color: #ff4500;">22</span>:<span style="color: #ff4500;">33</span>:<span style="color: #ff4500;">01</span><span style="color: #66cc66;">,</span><span style="color: #ff4500;">181</span>-INFO: Installing senta_bilstm module
+<span style="color: #ff4500;">2019</span>-<span style="color: #ff4500;">07</span>-<span style="color: #ff4500;">06</span> <span style="color: #ff4500;">22</span>:<span style="color: #ff4500;">33</span>:<span style="color: #ff4500;">01</span><span style="color: #66cc66;">,</span><span style="color: #ff4500;">182</span>-INFO: Module senta_bilstm already installed <span style="color: #ff7700;font-weight:bold;">in</span> /home/textminer/.<span style="color: black;">paddlehub</span>/modules/senta_bilstm
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">3</span><span style="color: black;">]</span>: test_text <span style="color: #66cc66;">=</span> <span style="color: black;">[</span><span style="color: #483d8b;">"这家餐厅很好吃"</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">"这部电影真的很差劲"</span><span style="color: #66cc66;">,</span><span style="color: #483d8b;">"我爱自然语言处理"</span><span style="color: black;">]</span>                
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">4</span><span style="color: black;">]</span>: input_dict <span style="color: #66cc66;">=</span> <span style="color: black;">{</span><span style="color: #483d8b;">"text"</span>: test_text<span style="color: black;">}</span>                                                        
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">5</span><span style="color: black;">]</span>: results <span style="color: #66cc66;">=</span> senta.<span style="color: black;">sentiment_classify</span><span style="color: black;">(</span>data<span style="color: #66cc66;">=</span>input_dict<span style="color: black;">)</span>                                     
+<span style="color: #ff4500;">2019</span>-<span style="color: #ff4500;">07</span>-<span style="color: #ff4500;">06</span> <span style="color: #ff4500;">22</span>:<span style="color: #ff4500;">33</span>:<span style="color: #ff4500;">53</span><span style="color: #66cc66;">,</span><span style="color: #ff4500;">835</span>-INFO: <span style="color: #ff4500;">13</span> pretrained paramaters loaded by PaddleHub
+<span style="color: #ff4500;">2019</span>-<span style="color: #ff4500;">07</span>-<span style="color: #ff4500;">06</span> <span style="color: #ff4500;">22</span>:<span style="color: #ff4500;">33</span>:<span style="color: #ff4500;">53</span><span style="color: #66cc66;">,</span><span style="color: #ff4500;">839</span>-INFO: <span style="color: #ff4500;">20</span> pretrained paramaters loaded by PaddleHub
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">6</span><span style="color: black;">]</span>: <span style="color: #ff7700;font-weight:bold;">for</span> result <span style="color: #ff7700;font-weight:bold;">in</span> results: 
+   ...:     <span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">(</span>result<span style="color: black;">)</span> 
+   ...:                                                                                         
+<span style="color: black;">{</span><span style="color: #483d8b;">'positive_probs'</span>: <span style="color: #ff4500;">0.9363</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'text'</span>: <span style="color: #483d8b;">'这家餐厅很好吃'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_key'</span>: <span style="color: #483d8b;">'positive'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'negative_probs'</span>: <span style="color: #ff4500;">0.0637</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_label'</span>: <span style="color: #ff4500;">2</span><span style="color: black;">}</span>
+<span style="color: black;">{</span><span style="color: #483d8b;">'positive_probs'</span>: <span style="color: #ff4500;">0.0213</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'text'</span>: <span style="color: #483d8b;">'这部电影真的很差劲'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_key'</span>: <span style="color: #483d8b;">'negative'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'negative_probs'</span>: <span style="color: #ff4500;">0.9787</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_label'</span>: <span style="color: #ff4500;">0</span><span style="color: black;">}</span>
+<span style="color: black;">{</span><span style="color: #483d8b;">'positive_probs'</span>: <span style="color: #ff4500;">0.9501</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'text'</span>: <span style="color: #483d8b;">'我爱自然语言处理'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_key'</span>: <span style="color: #483d8b;">'positive'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'negative_probs'</span>: <span style="color: #ff4500;">0.0499</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_label'</span>: <span style="color: #ff4500;">2</span><span style="color: black;">}</span></pre></td></tr></tbody></table><p class="theCode" style="display:none;">Python 3.5.2 (default, Nov 12 2018, 13:43:14) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.5.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import paddlehub as hub                                                                 
+
+In [2]: senta = hub.Module(name="senta_bilstm")                                                 
+2019-07-06 22:33:01,181-INFO: Installing senta_bilstm module
+2019-07-06 22:33:01,182-INFO: Module senta_bilstm already installed in /home/textminer/.paddlehub/modules/senta_bilstm
+
+In [3]: test_text = ["这家餐厅很好吃", "这部电影真的很差劲","我爱自然语言处理"]                
+
+In [4]: input_dict = {"text": test_text}                                                        
+
+In [5]: results = senta.sentiment_classify(data=input_dict)                                     
+2019-07-06 22:33:53,835-INFO: 13 pretrained paramaters loaded by PaddleHub
+2019-07-06 22:33:53,839-INFO: 20 pretrained paramaters loaded by PaddleHub
+
+In [6]: for result in results: 
+   ...:     print(result) 
+   ...:                                                                                         
+{'positive_probs': 0.9363, 'text': '这家餐厅很好吃', 'sentiment_key': 'positive', 'negative_probs': 0.0637, 'sentiment_label': 2}
+{'positive_probs': 0.0213, 'text': '这部电影真的很差劲', 'sentiment_key': 'negative', 'negative_probs': 0.9787, 'sentiment_label': 0}
+{'positive_probs': 0.9501, 'text': '我爱自然语言处理', 'sentiment_key': 'positive', 'negative_probs': 0.0499, 'sentiment_label': 2}</p></div>
+
+<p><span id="more-12017"></span></p>
+<p>目前百度Senta提供3个情感分析分类标签，分别是正向（Positive/积极)，负向（Negative/消极），中性（Neutral/中立)，中性的Case也会给出正向及负向概率，例如测试"我恨自然语言处理"，得到了一个中性分类标签，不过负向概率还是大一点：</p>
+
+<div class="wp_syntax" style="position:relative;"><table><tbody><tr><td class="code"><pre class="python" style="font-family:monospace;">In <span style="color: black;">[</span><span style="color: #ff4500;">27</span><span style="color: black;">]</span>: text <span style="color: #66cc66;">=</span> <span style="color: black;">[</span><span style="color: #483d8b;">'我恨自然语言处理'</span><span style="color: black;">]</span>                                                            
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">28</span><span style="color: black;">]</span>: input_dict <span style="color: #66cc66;">=</span> <span style="color: black;">{</span><span style="color: #483d8b;">"text"</span>: text<span style="color: black;">}</span>                                                            
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">29</span><span style="color: black;">]</span>: result <span style="color: #66cc66;">=</span> senta.<span style="color: black;">sentiment_classify</span><span style="color: black;">(</span>data<span style="color: #66cc66;">=</span>input_dict<span style="color: black;">)</span>                                     
+&nbsp;
+In <span style="color: black;">[</span><span style="color: #ff4500;">30</span><span style="color: black;">]</span>: <span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">(</span>result<span style="color: black;">[</span><span style="color: #ff4500;">0</span><span style="color: black;">]</span><span style="color: black;">)</span>                                                                       
+<span style="color: black;">{</span><span style="color: #483d8b;">'positive_probs'</span>: <span style="color: #ff4500;">0.4598</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'text'</span>: <span style="color: #483d8b;">'我恨自然语言处理'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_key'</span>: <span style="color: #483d8b;">'neutral'</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'negative_probs'</span>: <span style="color: #ff4500;">0.5402</span><span style="color: #66cc66;">,</span> <span style="color: #483d8b;">'sentiment_label'</span>: <span style="color: #ff4500;">1</span><span style="color: black;">}</span></pre></td></tr></tbody></table><p class="theCode" style="display:none;">In [27]: text = ['我恨自然语言处理']                                                            
+
+In [28]: input_dict = {"text": text}                                                            
+
+In [29]: result = senta.sentiment_classify(data=input_dict)                                     
+
+In [30]: print(result[0])                                                                       
+{'positive_probs': 0.4598, 'text': '我恨自然语言处理', 'sentiment_key': 'neutral', 'negative_probs': 0.5402, 'sentiment_label': 1}</p></div>
+
+<p>至于这个工具的效果如何，大家可以多测测，也可以参考这篇文中的一些测试用例：<br>
+<a href="https://mp.weixin.qq.com/s/yyYSBscDcmccWxkRwXRJ8w" rel="noopener" target="_blank">17行代码做情感分析？试试PaddlePaddle的Senta-BiLSTM吧！</a></p>
+<p>关于百度情感分析工具，官方已经开源了相关代码，可以参考官方代码和文档，写得很详细：</p>
+<p>百度Senta github：<a href="https://github.com/baidu/Senta" rel="noopener" target="_blank">https://github.com/baidu/Senta</a><br>
+<a href="https://github.com/baidu/Senta" rel="noopener" target="_blank">baidu/Senta</a>：Baidu's open-source Sentiment Classification System.</p>
+<p>飞桨PaddlePaddle知乎专栏：<a href="https://zhuanlan.zhihu.com/p/60583819" rel="noopener" target="_blank">https://zhuanlan.zhihu.com/p/60583819</a><br>
+​<a href="https://zhuanlan.zhihu.com/p/60583819" rel="noopener" target="_blank">PaddlePaddle Fluid实战：使用百度 Senta 情感分析系统</a> </p>
+<p>最后，如果什么都不想做只想测试这个工具的同学，欢迎关注AINLP公众号，对话直接输入'中文情感分析: 测试内容' 触发测试即可：<br>
+<img src="./paddlepaddle_sentiment_analysis_files/ainlp.jpg" alt="" width="300" height="300" class="aligncenter size-full wp-image-11285" srcset="http://www.52nlp.cn/wp-content/uploads/2019/03/ainlp.jpg 300w, http://www.52nlp.cn/wp-content/uploads/2019/03/ainlp-150x150.jpg 150w" sizes="(max-width: 300px) 100vw, 300px"></p>
+<p>注：原创文章，转载请注明出处及保留链接“<a href="http://www.52nlp.cn/">我爱自然语言处理</a>”：<a href="http://www.52nlp.cn/">http://www.52nlp.cn</a></p>
+<p>本文链接地址：<a href="http://www.52nlp.cn/%E7%99%BE%E5%BA%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%96%87%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7senta%E8%AF%95%E7%94%A8%E5%8F%8A%E5%9C%A8%E7%BA%BF%E6%B5%8B%E8%AF%95">百度深度学习中文情感分析工具Senta试用及在线测试</a> <a href="http://www.52nlp.cn/?p=12017">http://www.52nlp.cn/?p=12017</a></p>
+<div class="yarpp-related">
+<p>相关文章:</p><ol>
+<li><a href="http://www.52nlp.cn/%e7%8e%a9%e8%bd%ac%e8%85%be%e8%ae%af%e8%af%8d%e5%90%91%e9%87%8f-game-of-words-%e8%af%8d%e8%af%ad%e7%9a%84%e5%8a%a0%e5%87%8f%e6%b8%b8%e6%88%8f" rel="bookmark" title="玩转腾讯词向量：Game of Words（词语的加减游戏）">玩转腾讯词向量：Game of Words（词语的加减游戏） </a></li>
+<li><a href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e8%af%8d%e6%b3%95%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7lac%e8%af%95%e7%94%a8%e4%b9%8b%e6%97%85%e5%8f%8a%e6%b5%8b%e8%af%95" rel="bookmark" title="百度深度学习中文词法分析工具LAC试用之旅">百度深度学习中文词法分析工具LAC试用之旅 </a></li>
+<li><a href="http://www.52nlp.cn/10748-2" rel="bookmark" title="“达人”计划丨达观数据2019届校园招聘正式启动">“达人”计划丨达观数据2019届校园招聘正式启动 </a></li>
+<li><a href="http://www.52nlp.cn/ai-challenger-2018-%e7%bb%86%e7%b2%92%e5%ba%a6%e7%94%a8%e6%88%b7%e8%af%84%e8%ae%ba%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90-fasttext-baseline" rel="bookmark" title="AI Challenger 2018 细粒度用户评论情感分析 fastText Baseline">AI Challenger 2018 细粒度用户评论情感分析 fastText Baseline </a></li>
+<li><a href="http://www.52nlp.cn/%e6%96%af%e5%9d%a6%e7%a6%8f%e5%a4%a7%e5%ad%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e5%a4%84%e7%90%86%e8%af%be%e7%a8%8bcs224n-2019-%e5%85%a820%e8%a7%86%e9%a2%91" rel="bookmark" title="斯坦福大学深度学习自然语言处理课程CS224N 2019 全20个视频分享">斯坦福大学深度学习自然语言处理课程CS224N 2019 全20个视频分享 </a></li>
+<li><a href="http://www.52nlp.cn/%e8%b0%b7%e6%ad%8c%e4%ba%91%e5%b9%b3%e5%8f%b0%e4%b8%8a%e5%9f%ba%e4%ba%8etensorflow%e7%9a%84%e9%ab%98%e7%ba%a7%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0%e4%b8%93%e9%a1%b9%e8%af%be%e7%a8%8b" rel="bookmark" title="谷歌云平台上基于TensorFlow的高级机器学习专项课程">谷歌云平台上基于TensorFlow的高级机器学习专项课程 </a></li>
+<li><a href="http://www.52nlp.cn/%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e5%ae%9e%e8%b7%b5-%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%81%9a%e7%94%b5%e5%bd%b1%e8%af%84%e8%ae%ba%e6%96%87%e6%9c%ac%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90" rel="bookmark" title="深度学习实践：从零开始做电影评论文本情感分析">深度学习实践：从零开始做电影评论文本情感分析 </a></li>
+<li><a href="http://www.52nlp.cn/%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e5%a4%84%e7%90%86%e5%b7%a5%e5%85%b7%e5%8c%85spacy%e4%bb%8b%e7%bb%8d" rel="bookmark" title="自然语言处理工具包spaCy介绍">自然语言处理工具包spaCy介绍 </a></li>
+<li><a href="http://www.52nlp.cn/ai-challenger-2018-%e6%96%87%e6%9c%ac%e6%8c%96%e6%8e%98%e7%b1%bb%e7%ab%9e%e8%b5%9b%e7%9b%b8%e5%85%b3%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e4%bb%a3%e7%a0%81%e6%b1%87%e6%80%bb" rel="bookmark" title="AI Challenger 2018 文本挖掘类竞赛相关解决方案及代码汇总">AI Challenger 2018 文本挖掘类竞赛相关解决方案及代码汇总 </a></li>
+<li><a href="http://www.52nlp.cn/ai-challenger-2018-%e8%bf%9b%e8%a1%8c%e6%97%b6" rel="bookmark" title="AI Challenger 2018 进行时">AI Challenger 2018 进行时 </a></li>
+</ol><p></p>
+</div>
+<div class="code-block code-block-2" style="margin: 8px auto; text-align: center; clear: both;">
+<p align="center">一个有趣有AI的NLP公众号，欢迎关注</p>
+<a href="./paddlepaddle_sentiment_analysis_files/qrcode_for_gh_5034e4edc067_430-300x300.jpg"><img class="size-medium wp-image-85" alt="NLPJob" src="./paddlepaddle_sentiment_analysis_files/qrcode_for_gh_5034e4edc067_430-300x300.jpg" width="300" height="300"></a></div>
+					</div><!-- .entry-content -->
+		
+		<footer class="entry-meta">
+			本条目发布于<a href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95" title="10:41" rel="bookmark"><time class="entry-date" datetime="2019-07-08T10:41:15+00:00">2019年07月8号</time></a>。属于<a href="http://www.52nlp.cn/category/%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90" rel="category tag">情感分析</a>、<a href="http://www.52nlp.cn/category/nlp" rel="category tag">自然语言处理</a>分类，被贴了 <a href="http://www.52nlp.cn/tag/paddle" rel="tag">Paddle</a>、<a href="http://www.52nlp.cn/tag/paddlehub" rel="tag">PaddleHub</a>、<a href="http://www.52nlp.cn/tag/paddlenlp" rel="tag">PaddleNLP</a>、<a href="http://www.52nlp.cn/tag/paddlepaddle" rel="tag">PaddlePaddle</a>、<a href="http://www.52nlp.cn/tag/python" rel="tag">python</a>、<a href="http://www.52nlp.cn/tag/senta" rel="tag">Senta</a>、<a href="http://www.52nlp.cn/tag/%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90" rel="tag">中文情感分析</a>、<a href="http://www.52nlp.cn/tag/%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7" rel="tag">中文情感分析工具</a>、<a href="http://www.52nlp.cn/tag/%e6%83%85%e6%84%9f%e5%80%be%e5%90%91%e5%88%86%e6%9e%90" rel="tag">情感倾向分析</a>、<a href="http://www.52nlp.cn/tag/%e6%83%85%e6%84%9f%e5%80%be%e5%90%91%e5%88%86%e7%b1%bb" rel="tag">情感倾向分类</a>、<a href="http://www.52nlp.cn/tag/%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90" rel="tag">情感分析</a>、<a href="http://www.52nlp.cn/tag/%e6%83%85%e6%84%9f%e5%88%86%e7%b1%bb" rel="tag">情感分类</a>、<a href="http://www.52nlp.cn/tag/text-classification" rel="tag">文本分类</a>、<a href="http://www.52nlp.cn/tag/%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0" rel="tag">深度学习</a>、<a href="http://www.52nlp.cn/tag/%e7%99%be%e5%ba%a6senta" rel="tag">百度Senta</a>、<a href="http://www.52nlp.cn/tag/%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e5%a4%84%e7%90%86" rel="tag">自然语言处理</a> 标签。<span class="by-author">作者是<span class="author vcard"><a class="url fn n" href="http://www.52nlp.cn/author/admin" title="查看所有由52nlp发布的文章" rel="author">52nlp</a></span>。</span>								</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+				<nav class="nav-single">
+					<h3 class="assistive-text">文章导航</h3>
+					<span class="nav-previous"><a href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e8%87%aa%e5%8a%a8%e4%bd%9c%e8%af%97%e6%9c%ba%e4%b8%8a%e7%ba%bf" rel="prev"><span class="meta-nav">←</span> AINLP公众号"自动作诗机"上线</a></span>
+					<span class="nav-next"><a href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e6%96%b0%e5%a2%9esnownlp%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e6%a8%a1%e5%9d%97" rel="next">AINLP公众号新增SnowNLP情感分析模块 <span class="meta-nav">→</span></a></span>
+				</nav><!-- .nav-single -->
+
+				
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95#respond" style="display:none;">取消回复</a></small></h3>			<form action="http://www.52nlp.cn/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="12017" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="156f99aa5e"></p><p style="display: none;"></p><p><input type="hidden" id="comment_reply_ID" name="comment_reply_ID" value="0"><input type="hidden" id="comment_reply_dp" name="comment_reply_dp" value="0"></p><div id="cancel_reply" style="display:none;"><a href="javascript:void(0)" onclick="movecfm(null,0,1,null);" style="color:red;">点击取消回复</a></div><script type="text/javascript">
+/* <![CDATA[ */
+var commentformid = "commentform";
+var USERINFO = false;
+var atreply = "none";
+/* ]]> */
+</script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/wp-thread-comment.js.php"></script>
+			<input type="hidden" id="ak_js" name="ak_js" value="1564296186964"></form>
+			</div><!-- #respond -->
+	
+</div><!-- #comments .comments-area -->
+
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-5" class="widget widget_text"><h3 class="widget-title">关注我们的微信公众号AINLP</h3>			<div class="textwidget"><a href="./paddlepaddle_sentiment_analysis_files/qrcode_for_gh_5034e4edc067_430-300x300.jpg"><img class="size-medium wp-image-85" alt="NLPJob" src="./paddlepaddle_sentiment_analysis_files/qrcode_for_gh_5034e4edc067_430-300x300.jpg" width="300" height="300"></a> </div>
+		</aside><aside id="search-3" class="widget widget_search"><h3 class="widget-title">站内搜索</h3><form role="search" method="get" id="searchform" class="searchform" action="http://www.52nlp.cn/">
+				<div>
+					<label class="screen-reader-text" for="s">搜索：</label>
+					<input type="text" value="" name="s" id="s">
+					<input type="submit" id="searchsubmit" value="搜索">
+				</div>
+			</form></aside><aside id="categories-309398092" class="widget widget_categories"><h3 class="widget-title">分类目录</h3>		<ul>
+	<li class="cat-item cat-item-1953"><a href="http://www.52nlp.cn/category/ainlp">AINLP</a>
+</li>
+	<li class="cat-item cat-item-72"><a href="http://www.52nlp.cn/category/mit-nlp" title="麻省理工学院开放式课程&quot;自然语言处理“的相关翻译文章">MIT自然语言处理</a>
+</li>
+	<li class="cat-item cat-item-976"><a href="http://www.52nlp.cn/category/pattern-recognition-and-machine-learning-2">PRML</a>
+</li>
+	<li class="cat-item cat-item-469"><a href="http://www.52nlp.cn/category/topic-model">Topic Model</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="http://www.52nlp.cn/category/wordpress">wordpress</a>
+</li>
+	<li class="cat-item cat-item-1565"><a href="http://www.52nlp.cn/category/%e4%b8%93%e5%88%a9%e6%8c%96%e6%8e%98">专利挖掘</a>
+</li>
+	<li class="cat-item cat-item-317"><a href="http://www.52nlp.cn/category/%e4%b8%93%e9%a2%98">专题</a>
+</li>
+	<li class="cat-item cat-item-263"><a href="http://www.52nlp.cn/category/chinese-information-processing">中文信息处理</a>
+</li>
+	<li class="cat-item cat-item-62"><a href="http://www.52nlp.cn/category/word-segmentation">中文分词</a>
+</li>
+	<li class="cat-item cat-item-1915"><a href="http://www.52nlp.cn/category/%e4%ba%ba%e5%b7%a5%e6%99%ba%e8%83%bd">人工智能</a>
+</li>
+	<li class="cat-item cat-item-1490"><a href="http://www.52nlp.cn/category/%e5%85%ac%e5%bc%80%e8%af%be" title="公开课 &amp; 课程">公开课</a>
+</li>
+	<li class="cat-item cat-item-1968"><a href="http://www.52nlp.cn/category/%e5%91%bd%e5%90%8d%e5%ae%9e%e4%bd%93%e8%af%86%e5%88%ab">命名实体识别</a>
+</li>
+	<li class="cat-item cat-item-420"><a href="http://www.52nlp.cn/category/%e5%b9%b6%e8%a1%8c%e7%ae%97%e6%b3%95">并行算法</a>
+</li>
+	<li class="cat-item cat-item-1658"><a href="http://www.52nlp.cn/category/%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90">情感分析</a>
+</li>
+	<li class="cat-item cat-item-268"><a href="http://www.52nlp.cn/category/%e6%8b%9b%e8%81%98">招聘</a>
+</li>
+	<li class="cat-item cat-item-560"><a href="http://www.52nlp.cn/category/%e6%8e%a8%e8%8d%90%e7%b3%bb%e7%bb%9f">推荐系统</a>
+</li>
+	<li class="cat-item cat-item-1808"><a href="http://www.52nlp.cn/category/%e6%95%b0%e5%ad%a6">数学</a>
+</li>
+	<li class="cat-item cat-item-354"><a href="http://www.52nlp.cn/category/%e6%95%b0%e6%8d%ae%e6%8c%96%e6%8e%98">数据挖掘</a>
+</li>
+	<li class="cat-item cat-item-1630"><a href="http://www.52nlp.cn/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6">数据科学</a>
+</li>
+	<li class="cat-item cat-item-1633"><a href="http://www.52nlp.cn/category/%e6%95%b0%e6%8d%ae%e7%ab%9e%e8%b5%9b">数据竞赛</a>
+</li>
+	<li class="cat-item cat-item-241"><a href="http://www.52nlp.cn/category/text-classification">文本分类</a>
+</li>
+	<li class="cat-item cat-item-1149"><a href="http://www.52nlp.cn/category/wen-ben-chu-li-yan-shi-xi-tong">文本处理演示系统</a>
+</li>
+	<li class="cat-item cat-item-1869"><a href="http://www.52nlp.cn/category/%e6%99%ba%e8%83%bd%e9%97%ae%e7%ad%94">智能问答</a>
+</li>
+	<li class="cat-item cat-item-193"><a href="http://www.52nlp.cn/category/maximum-entropy-model">最大熵模型</a>
+</li>
+	<li class="cat-item cat-item-344"><a href="http://www.52nlp.cn/category/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0">机器学习</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.52nlp.cn/category/machine-translation">机器翻译</a>
+</li>
+	<li class="cat-item cat-item-195"><a href="http://www.52nlp.cn/category/%e6%9d%a1%e4%bb%b6%e9%9a%8f%e6%9c%ba%e5%9c%ba">条件随机场</a>
+</li>
+	<li class="cat-item cat-item-153"><a href="http://www.52nlp.cn/category/tagging">标注</a>
+</li>
+	<li class="cat-item cat-item-1153"><a href="http://www.52nlp.cn/category/%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0">深度学习</a>
+</li>
+	<li class="cat-item cat-item-885"><a href="http://www.52nlp.cn/category/%e7%a7%91%e5%ad%a6%e8%ae%a1%e7%ae%97">科学计算</a>
+</li>
+	<li class="cat-item cat-item-538"><a href="http://www.52nlp.cn/category/%e7%bb%9f%e8%ae%a1%e5%ad%a6">统计学</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="http://www.52nlp.cn/category/translation-model">翻译模型</a>
+</li>
+	<li class="cat-item cat-item-1843"><a href="http://www.52nlp.cn/category/%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba">聊天机器人</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://www.52nlp.cn/category/nlp">自然语言处理</a>
+</li>
+	<li class="cat-item cat-item-1978"><a href="http://www.52nlp.cn/category/%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e7%94%9f%e6%88%90">自然语言生成</a>
+</li>
+	<li class="cat-item cat-item-106"><a href="http://www.52nlp.cn/category/computational-linguistics">计算语言学</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://www.52nlp.cn/category/dictionary">词典</a>
+</li>
+	<li class="cat-item cat-item-1952"><a href="http://www.52nlp.cn/category/%e8%af%8d%e6%80%a7%e6%a0%87%e6%b3%a8">词性标注</a>
+</li>
+	<li class="cat-item cat-item-221"><a href="http://www.52nlp.cn/category/semantics">语义学</a>
+</li>
+	<li class="cat-item cat-item-1121"><a href="http://www.52nlp.cn/category/%e8%af%ad%e4%b9%89%e7%9b%b8%e4%bc%bc%e5%ba%a6">语义相似度</a>
+</li>
+	<li class="cat-item cat-item-161"><a href="http://www.52nlp.cn/category/semantic-web">语义网</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="http://www.52nlp.cn/category/corpus">语料库</a>
+</li>
+	<li class="cat-item cat-item-86"><a href="http://www.52nlp.cn/category/language-model">语言模型</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="http://www.52nlp.cn/category/speech-recognition">语音识别</a>
+</li>
+	<li class="cat-item cat-item-314"><a href="http://www.52nlp.cn/category/%e8%b4%9d%e5%8f%b6%e6%96%af%e6%a8%a1%e5%9e%8b">贝叶斯模型</a>
+</li>
+	<li class="cat-item cat-item-110"><a href="http://www.52nlp.cn/category/reprint">转载</a>
+</li>
+	<li class="cat-item cat-item-451"><a href="http://www.52nlp.cn/category/%e9%97%ae%e7%ad%94%e7%b3%bb%e7%bb%9f">问答系统</a>
+</li>
+	<li class="cat-item cat-item-1648"><a href="http://www.52nlp.cn/category/%e9%98%85%e8%af%bb%e7%90%86%e8%a7%a3">阅读理解</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.52nlp.cn/category/informal-essay">随笔</a>
+</li>
+	<li class="cat-item cat-item-60"><a href="http://www.52nlp.cn/category/hidden-markov-model">隐马尔科夫模型</a>
+</li>
+		</ul>
+</aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">最新文章</h3>		<ul>
+											<li>
+					<a href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e5%af%b9%e8%af%9d%e6%8e%a5%e5%8f%a3%e6%96%b0%e5%a2%9e%e6%88%90%e8%af%ad%e6%8e%a5%e9%be%99">AINLP公众号对话接口新增成语接龙</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/%e6%ac%a2%e8%bf%8e%e5%85%b3%e6%b3%a8ainlp-%e4%b8%80%e4%b8%aa%e6%9c%89%e8%b6%a3%e6%9c%89ai%e7%9a%84nlp%e5%85%ac%e4%bc%97%e5%8f%b7">欢迎关注AINLP：一个有趣有AI的NLP公众号</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e6%96%b0%e5%a2%9esnownlp%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e6%a8%a1%e5%9d%97">AINLP公众号新增SnowNLP情感分析模块</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7senta%e8%af%95%e7%94%a8%e5%8f%8a%e5%9c%a8%e7%ba%bf%e6%b5%8b%e8%af%95">百度深度学习中文情感分析工具Senta试用及在线测试</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/ainlp%e5%85%ac%e4%bc%97%e5%8f%b7%e8%87%aa%e5%8a%a8%e4%bd%9c%e8%af%97%e6%9c%ba%e4%b8%8a%e7%ba%bf">AINLP公众号"自动作诗机"上线</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/%e7%99%be%e5%ba%a6%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e4%b8%ad%e6%96%87%e8%af%8d%e6%b3%95%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7lac%e8%af%95%e7%94%a8%e4%b9%8b%e6%97%85%e5%8f%8a%e6%b5%8b%e8%af%95">百度深度学习中文词法分析工具LAC试用之旅</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/%e8%af%8d%e5%90%91%e9%87%8f%e6%b8%b8%e6%88%8f-%e4%b8%80%e4%ba%9b%e6%9c%89%e6%84%8f%e6%80%9d%e7%9a%84%e4%be%8b%e5%ad%90">词向量游戏：一些有意思的例子</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e7%90%86%e8%a7%a3%e5%a4%aa%e9%9a%be%e4%ba%86%e4%b9%8b%e4%b8%ad%e6%96%87%e5%88%86%e8%af%8d%e5%85%ab%e7%ba%a7%e6%b5%8b%e8%af%95">自然语言理解太难了之中文分词八级测试</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/python-%e5%92%8c-elasticsearch-%e6%9e%84%e5%bb%ba%e7%ae%80%e6%98%93%e6%90%9c%e7%b4%a2">Python 和 Elasticsearch 构建简易搜索</a>
+									</li>
+											<li>
+					<a href="http://www.52nlp.cn/docker-%e9%83%a8%e7%bd%b2python%e9%a1%b9%e7%9b%ae">Docker 部署Python项目</a>
+									</li>
+					</ul>
+		</aside><aside id="recentcomments" class="widget widget_recentcomments"><h3 class="widget-title">最近评论</h3><ul style="cursor: auto;"><li id="rc-comment-290113" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e7%94%a8mecab%e6%89%93%e9%80%a0%e4%b8%80%e5%a5%97%e5%ae%9e%e7%94%a8%e7%9a%84%e4%b8%ad%e6%96%87%e5%88%86%e8%af%8d%e7%b3%bb%e7%bb%9f%e4%b8%89%ef%bc%9amecab-chinese#comment-290113" title="用MeCab打造一套实用的中文分词系统(三)：MeCab-Chinese">Wang</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">如果中文能有一个和neol<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289859" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e5%a4%b8%e5%a4%b8%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%8d%87%e7%ba%a7-%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%a4%b8%e5%88%b0%e5%87%86%e4%b8%aa%e6%80%a7%e5%8c%96#comment-289859" title="夸夸聊天机器人升级：从随机到准个性化">52nlp</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">抱歉，暂时不能，还有一些地<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289857" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e5%a4%b8%e5%a4%b8%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%8d%87%e7%ba%a7-%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%a4%b8%e5%88%b0%e5%87%86%e4%b8%aa%e6%80%a7%e5%8c%96#comment-289857" title="夸夸聊天机器人升级：从随机到准个性化">李子恒</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">作者，您好，您可以开源代码<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289812" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/ai-challenger-2018-%e7%bb%86%e7%b2%92%e5%ba%a6%e7%94%a8%e6%88%b7%e8%af%84%e8%ae%ba%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90-fasttext-baseline#comment-289812" title="AI Challenger 2018 细粒度用户评论情感分析 fastText Baseline">52nlp</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">这个参数值可调，实际跑的时<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289810" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/ai-challenger-2018-%e7%bb%86%e7%b2%92%e5%ba%a6%e7%94%a8%e6%88%b7%e8%af%84%e8%ae%ba%e6%83%85%e6%84%9f%e5%88%86%e6%9e%90-fasttext-baseline#comment-289810" title="AI Challenger 2018 细粒度用户评论情感分析 fastText Baseline">邓晶晶</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">为啥learning ra<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289671" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/opencorpus#comment-289671" title="公布一批中文文本分类的新闻语料库">lauqasim</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">这个语料怎么解析呀，打开是<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289656" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e8%85%be%e8%ae%af%e8%af%8d%e5%90%91%e9%87%8f%e5%ae%9e%e6%88%98-%e9%80%9a%e8%bf%87annoy%e8%bf%9b%e8%a1%8c%e7%b4%a2%e5%bc%95%e5%92%8c%e5%bf%ab%e9%80%9f%e6%9f%a5%e8%af%a2#comment-289656" title="腾讯词向量实战：通过Annoy进行索引和快速查询">52nlp</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">不是</div></li><li id="rc-comment-289654" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e8%85%be%e8%ae%af%e8%af%8d%e5%90%91%e9%87%8f%e5%ae%9e%e6%88%98-%e9%80%9a%e8%bf%87annoy%e8%bf%9b%e8%a1%8c%e7%b4%a2%e5%bc%95%e5%92%8c%e5%bf%ab%e9%80%9f%e6%9f%a5%e8%af%a2#comment-289654" title="腾讯词向量实战：通过Annoy进行索引和快速查询">weehaa</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">这种是不是意味着只能根据汉<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289553" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/qa%e9%97%ae%e7%ad%94%e7%b3%bb%e7%bb%9f%e4%b8%ad%e7%9a%84%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e6%8a%80%e6%9c%af%e5%ae%9e%e7%8e%b0#comment-289553" title="QA问答系统中的深度学习技术实现">July</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">#processed fi<span class="rc-ellipsis">...</span></div></li><li id="rc-comment-289488" class="rc-item rc-comment rc-clearfix"><div class="rc-info"><a class="rc-reviewer" rel="nofollow" href="http://www.52nlp.cn/%e8%85%be%e8%ae%af%e8%af%8d%e5%90%91%e9%87%8f%e5%ae%9e%e6%88%98-%e9%80%9a%e8%bf%87annoy%e8%bf%9b%e8%a1%8c%e7%b4%a2%e5%bc%95%e5%92%8c%e5%bf%ab%e9%80%9f%e6%9f%a5%e8%af%a2#comment-289488" title="腾讯词向量实战：通过Annoy进行索引和快速查询">52nlp</a></div><div class="rc-timestamp"></div><div class="rc-excerpt">这个本身就是公开的，操作步<span class="rc-ellipsis">...</span></div></li></ul></aside><aside id="archives-3" class="widget widget_archive"><h3 class="widget-title">文章归档</h3>		<ul>
+			<li><a href="http://www.52nlp.cn/2019/07">2019年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/06">2019年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/05">2019年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/04">2019年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/03">2019年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/02">2019年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2019/01">2019年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/12">2018年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/11">2018年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/10">2018年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/09">2018年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/08">2018年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/07">2018年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/06">2018年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/05">2018年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/04">2018年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/03">2018年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/02">2018年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2018/01">2018年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/12">2017年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/11">2017年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/10">2017年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/09">2017年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/08">2017年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/07">2017年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2017/04">2017年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2016/11">2016年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2016/09">2016年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2016/07">2016年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2016/06">2016年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2016/04">2016年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/12">2015年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/11">2015年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/09">2015年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/08">2015年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/07">2015年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/06">2015年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/05">2015年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/04">2015年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/03">2015年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2015/01">2015年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/12">2014年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/11">2014年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/09">2014年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/07">2014年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/06">2014年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/05">2014年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/04">2014年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2014/01">2014年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/12">2013年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/06">2013年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/05">2013年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/04">2013年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/03">2013年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/02">2013年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2013/01">2013年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/12">2012年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/11">2012年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/10">2012年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/09">2012年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/08">2012年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/07">2012年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/06">2012年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/05">2012年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/04">2012年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/03">2012年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2012/01">2012年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/12">2011年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/11">2011年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/10">2011年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/09">2011年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/08">2011年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/07">2011年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/06">2011年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/05">2011年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/04">2011年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/03">2011年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/02">2011年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2011/01">2011年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/12">2010年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/11">2010年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/10">2010年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/09">2010年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/08">2010年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/07">2010年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/06">2010年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/05">2010年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/04">2010年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/03">2010年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/02">2010年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2010/01">2010年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/12">2009年十二月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/11">2009年十一月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/10">2009年十月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/09">2009年九月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/08">2009年八月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/07">2009年七月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/06">2009年六月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/05">2009年五月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/04">2009年四月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/03">2009年三月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/02">2009年二月</a></li>
+	<li><a href="http://www.52nlp.cn/2009/01">2009年一月</a></li>
+	<li><a href="http://www.52nlp.cn/2008/12">2008年十二月</a></li>
+		</ul>
+		</aside><aside id="buffercode_fl_widget_info-2" class="widget buffercode_fl_widget_info"><h3 class="widget-title"></h3>				<li style="list-style-type:none;">
+					<a href="http://textminingonline.com/" target="_blank">Text Mining Online					</a>
+				</li>
+							<li style="list-style-type:none;">
+					<a href="http://textanalysisonline.com/" target="_blank">Text Analysis Online					</a>
+				</li>
+							<li style="list-style-type:none;">
+					<a href="http://textprocessing.org/" target="_blank">Text Processing					</a>
+				</li>
+							<li style="list-style-type:none;">
+					<a href="http://keywordextraction.net/" target="_blank">Keyword Extraction					</a>
+				</li>
+							<li style="list-style-type:none;">
+					<a href="http://textsummarization.net/" target="_blank">Text Summarization					</a>
+				</li>
+			</aside><aside id="buffercode_fl_widget_info-3" class="widget buffercode_fl_widget_info"><h3 class="widget-title"></h3>				<li style="list-style-type:none;">
+					<a href="http://wordsimilarity.com/" target="_blank">Word Similarity					</a>
+				</li>
+			</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+									<a href="https://cn.wordpress.org/" class="imprint" title="优雅的个人发布平台">
+				自豪地采用WordPress			</a>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//p.nlpjob.cn/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code --><script>
+/* <![CDATA[ */
+var rcGlobal = {
+	serverUrl		:'http://www.52nlp.cn',
+	infoTemp		:'%REVIEWER% 在 %POST%',
+	loadingText		:'正在加载',
+	noCommentsText	:'没有任何评论',
+	newestText		:'&laquo; 最新的',
+	newerText		:'&laquo; 上一页',
+	olderText		:'下一页 &raquo;',
+	showContent		:'',
+	external		:'',
+	avatarSize		:'0',
+	avatarPosition	:'left',
+	anonymous		:'匿名'
+};
+/* ]]> */
+</script>
+<link rel="stylesheet" id="yarppRelatedCss-css" href="./paddlepaddle_sentiment_analysis_files/related.css" type="text/css" media="all">
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/wp-recentcomments.js"></script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/wp-syntax.js"></script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/navigation.js"></script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/new-tab.min.js"></script>
+<script type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/wp-embed.min.js"></script>
+<script async="async" type="text/javascript" src="./paddlepaddle_sentiment_analysis_files/form.js"></script>
+
+
+</body></html>
